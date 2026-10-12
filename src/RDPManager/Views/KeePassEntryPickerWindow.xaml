@@ -1,0 +1,69 @@
+<ui:FluentWindow x:Class="RDPManager.Views.KeePassEntryPickerWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 Title="Vybrat záznam z KeePassu"
+                 Width="620" Height="560" MinWidth="420" MinHeight="360"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="None"
+                 Background="{DynamicResource ApplicationBackgroundBrush}"
+                 ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Title="Vybrat záznam z KeePassu" ShowMinimize="False" ShowMaximize="False" />
+
+        <ui:TextBox x:Name="SearchBox" Grid.Row="1" Margin="16,4,16,8"
+                    PlaceholderText="Hledat v názvu, jménu, URL a skupině…"
+                    Icon="{ui:SymbolIcon Search20}" ClearButtonEnabled="True"
+                    TextChanged="SearchBox_TextChanged" PreviewKeyDown="SearchBox_PreviewKeyDown" />
+
+        <ListBox x:Name="EntryList" Grid.Row="2" Margin="16,0"
+                 Background="Transparent" BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 MouseDoubleClick="EntryList_MouseDoubleClick">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="8,6" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Symbol="Key24" FontSize="18" Margin="0,0,10,0" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock FontWeight="SemiBold" Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                            <TextBlock FontSize="12" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                                <Run Text="{Binding UserName, Mode=OneWay}" />
+                                <Run Text="  ·  " Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                <Run Text="{Binding GroupPath, Mode=OneWay}" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Border Grid.Row="3" Margin="0,8,0,0" Padding="16,12"
+                Background="{DynamicResource SolidBackgroundFillColorSecondaryBrush}">
+            <Grid>
+                <TextBlock x:Name="CountText" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <ui:Button Appearance="Primary" Content="Vybrat" MinWidth="100" IsDefault="True" Click="Select_Click" />
+                    <ui:Button Margin="8,0,0,0" Content="Zrušit" MinWidth="100" IsCancel="True" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</ui:FluentWindow>

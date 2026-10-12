@@ -1,0 +1,114 @@
+<ui:FluentWindow x:Class="RDPManager.Views.SettingsWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:views="clr-namespace:RDPManager.Views"
+                 Title="Nastavení"
+                 Width="560" Height="700" MinWidth="460" MinHeight="480"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="None"
+                 Background="{DynamicResource ApplicationBackgroundBrush}"
+                 ShowInTaskbar="False">
+    <ui:FluentWindow.Resources>
+        <views:EnumEqualsConverter x:Key="EnumEquals" />
+    </ui:FluentWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Title="Nastavení" ShowMinimize="False" ShowMaximize="False" />
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20,0,20,16">
+                <!-- Dock -->
+                <TextBlock Style="{StaticResource SectionHeader}" Margin="0,4,0,8" Text="Lišta" />
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Okraj obrazovky" />
+                <WrapPanel>
+                    <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Vlevo" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Left}" />
+                    <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Vpravo" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Right}" />
+                    <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Nahoře" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Top}" />
+                    <RadioButton GroupName="Edge" Content="Dole" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Bottom}" />
+                </WrapPanel>
+                <TextBlock Style="{StaticResource Hint}" Text="Horní okraj koliduje s lištou připojení mstsc. Na okraji sdíleném s jiným monitorem je potřeba myš chvíli podržet." />
+
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Monitor" />
+                <ComboBox x:Name="MonitorBox" DisplayMemberPath="Label" SelectedValuePath="DeviceName" />
+
+                <Grid Margin="0,4,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,8,0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Šířka (px)" />
+                        <ui:TextBox Text="{Binding DockSize}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Vysunout po (ms)" />
+                        <ui:TextBox Text="{Binding ShowDelayMs}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Zasunout po (ms)" />
+                        <ui:TextBox Text="{Binding HideDelayMs}" />
+                    </StackPanel>
+                </Grid>
+
+                <ui:ToggleSwitch Margin="0,14,0,0" Content="Po připojení lištu zasunout" IsChecked="{Binding HideAfterConnect}" />
+                <ui:ToggleSwitch Margin="0,14,0,0" Content="Globální klávesová zkratka" IsChecked="{Binding HotkeyEnabled}" />
+                <ui:TextBox x:Name="HotkeyBox" Margin="0,8,0,0" IsReadOnly="True" IsReadOnlyCaretVisible="True"
+                            PreviewKeyDown="HotkeyBox_PreviewKeyDown"
+                            IsEnabled="{Binding HotkeyEnabled}"
+                            Icon="{ui:SymbolIcon Keyboard24}" />
+                <TextBlock Style="{StaticResource Hint}" Text="Klikni do pole a stiskni kombinaci. Ve full-screen RDP zachytává klávesy vzdálená relace – tam lištu vyvoláš myší na okraji." />
+
+                <!-- KeePass -->
+                <TextBlock Style="{StaticResource SectionHeader}" Text="KeePass" />
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Databáze (.kdbx)" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBox Text="{Binding KeePassDatabasePath}" PlaceholderText="C:\...\Hesla.kdbx" />
+                    <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="…" Click="BrowseDatabase_Click" />
+                </Grid>
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Soubor s klíčem (volitelné)" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBox Text="{Binding KeePassKeyFilePath}" PlaceholderText="(žádný)" />
+                    <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="…" Click="BrowseKeyFile_Click" />
+                </Grid>
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Automaticky zamknout po nečinnosti (minuty, 0 = nikdy)" />
+                <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding KeePassAutoLockMinutes}" />
+                <ui:ToggleSwitch Margin="0,14,0,0" Content="Zamknout při zamčení Windows (Win+L)" IsChecked="{Binding KeePassLockOnWorkstationLock}" />
+
+                <!-- General -->
+                <TextBlock Style="{StaticResource SectionHeader}" Text="Obecné" />
+                <ui:ToggleSwitch Content="Spouštět s Windows" IsChecked="{Binding StartWithWindows}" />
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Vzhled" />
+                <WrapPanel>
+                    <RadioButton GroupName="Theme" Margin="0,0,16,0" Content="Podle systému" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=System}" />
+                    <RadioButton GroupName="Theme" Margin="0,0,16,0" Content="Světlý" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=Light}" />
+                    <RadioButton GroupName="Theme" Content="Tmavý" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=Dark}" />
+                </WrapPanel>
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Smazat dočasné pověření po (sekundy)" />
+                <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding CredentialCleanupSeconds}" />
+                <TextBlock Style="{StaticResource Hint}" Text="Jak dlouho zůstane heslo z KeePassu ve Správci pověření Windows, než si ho mstsc přečte. Prodluž, pokud se přihlášení nestihne (např. dlouho potvrzuješ certifikát)." />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Padding="16,12" Background="{DynamicResource SolidBackgroundFillColorSecondaryBrush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ui:Button Appearance="Primary" Content="Uložit" MinWidth="100" IsDefault="True" Click="Save_Click" />
+                <ui:Button Margin="8,0,0,0" Content="Zrušit" MinWidth="100" IsCancel="True" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</ui:FluentWindow>
