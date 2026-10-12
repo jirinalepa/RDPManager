@@ -31,6 +31,14 @@ public partial class ConnectionEditorWindow : FluentWindow
             UpdateCredentialUi();
     }
 
+    private void SectionList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (SectionHost == null)
+            return;
+        for (var i = 0; i < SectionHost.Children.Count; i++)
+            SectionHost.Children[i].Visibility = i == SectionList.SelectedIndex ? Visibility.Visible : Visibility.Collapsed;
+    }
+
     private void UpdateCredentialUi()
     {
         var keePass = Result.CredentialMode == CredentialMode.KeePass;

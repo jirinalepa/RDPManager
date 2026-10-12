@@ -78,13 +78,14 @@ public partial class App : Application
         var lockItem = new Forms.ToolStripMenuItem("Zamknout KeePass", null, (_, _) => _controller!.KeePass.Lock());
         menu.Items.Add(lockItem);
         menu.Items.Add(new Forms.ToolStripSeparator());
+        menu.Items.Add($"O aplikaci ({AppInfo.Version})", null, (_, _) => AppInfo.OpenRepository());
         menu.Items.Add("Ukončit", null, (_, _) => ExitApp());
         menu.Opening += (_, _) => lockItem.Enabled = _controller!.KeePass.IsOpen;
 
         _tray = new Forms.NotifyIcon
         {
             Icon = AppIcon.Icon,
-            Text = "RDP Manager",
+            Text = AppInfo.ProductWithVersion,
             ContextMenuStrip = menu,
             Visible = true,
         };

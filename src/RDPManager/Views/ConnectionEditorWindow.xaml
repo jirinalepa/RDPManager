@@ -4,7 +4,7 @@
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:views="clr-namespace:RDPManager.Views"
                  Title="Spojení"
-                 Width="560" Height="640" MinWidth="460" MinHeight="480"
+                 Width="700" Height="580" MinWidth="580" MinHeight="480"
                  ExtendsContentIntoTitleBar="True"
                  WindowBackdropType="None"
                  Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -21,10 +21,34 @@
 
         <ui:TitleBar x:Name="TitleBar" Grid.Row="0" Title="Spojení" ShowMinimize="False" ShowMaximize="False" />
 
-        <TabControl Grid.Row="1" Margin="16,4,16,0">
-            <!-- General -->
-            <TabItem Header="Obecné">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Grid.Row="1" Margin="12,4,16,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Section navigation -->
+            <ListBox x:Name="SectionList" Grid.Column="0" Margin="0,4,12,0" Background="Transparent" BorderThickness="0"
+                     SelectedIndex="0" SelectionChanged="SectionList_SelectionChanged">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Setter Property="Padding" Value="10,8" />
+                        <Setter Property="Margin" Value="0,0,0,2" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Desktop24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Obecné" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Key24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Přihlášení" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Window24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Obrazovka" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="ArrowSwap24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Přesměrování" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Settings24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Pokročilé" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+            </ListBox>
+
+            <Rectangle Grid.Column="0" Width="1" HorizontalAlignment="Right" Margin="0,4,0,0"
+                       Fill="{DynamicResource DividerStrokeColorDefaultBrush}" />
+
+            <!-- Sections -->
+            <Grid x:Name="SectionHost" Grid.Column="1" Margin="12,0,0,0">            <!-- General -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="4,4,12,12">
                         <TextBlock Style="{StaticResource FieldLabel}" Text="Název" />
                         <ui:TextBox x:Name="NameBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="např. Souborový server" />
@@ -48,11 +72,9 @@
                         <ui:TextBox Text="{Binding Notes}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="70" VerticalContentAlignment="Top" />
                     </StackPanel>
                 </ScrollViewer>
-            </TabItem>
 
             <!-- Credentials -->
-            <TabItem Header="Přihlášení">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
                         <TextBlock Style="{StaticResource SectionHeader}" Text="Způsob přihlášení" />
                         <RadioButton GroupName="Mode" Content="Doménový / aktuální účet (mstsc použije uložené údaje nebo se zeptá)"
@@ -80,11 +102,9 @@
                         <TextBlock x:Name="UsernameHint" Style="{StaticResource Hint}" />
                     </StackPanel>
                 </ScrollViewer>
-            </TabItem>
 
             <!-- Display -->
-            <TabItem Header="Obrazovka">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
                         <ui:ToggleSwitch Margin="0,12,0,0" Content="Celá obrazovka" IsChecked="{Binding FullScreen}" />
                         <ui:ToggleSwitch Margin="0,12,0,0" Content="Použít více monitorů" IsChecked="{Binding UseMultimon}" />
@@ -99,11 +119,9 @@
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
-            </TabItem>
 
             <!-- Redirection -->
-            <TabItem Header="Přesměrování">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
                         <ui:ToggleSwitch Margin="0,12,0,0" Content="Schránka" IsChecked="{Binding RedirectClipboard}" />
                         <ui:ToggleSwitch Margin="0,12,0,0" Content="Lokální disky" IsChecked="{Binding RedirectDrives}" />
@@ -117,11 +135,9 @@
                                      IsChecked="{Binding AudioMode, Converter={StaticResource EnumEquals}, ConverterParameter=None}" />
                     </StackPanel>
                 </ScrollViewer>
-            </TabItem>
 
             <!-- Advanced -->
-            <TabItem Header="Pokročilé">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
                         <ui:ToggleSwitch Margin="0,12,0,0" Content="Administrátorská relace (/admin)" IsChecked="{Binding AdminSession}" />
                         <TextBlock Style="{StaticResource FieldLabel}" Text="RD Gateway (volitelné)" />
@@ -133,8 +149,8 @@
                                     PlaceholderText="např. smart sizing:i:1" />
                     </StackPanel>
                 </ScrollViewer>
-            </TabItem>
-        </TabControl>
+            </Grid>
+        </Grid>
 
         <Border Grid.Row="2" Margin="0,12,0,0" Padding="16,12"
                 Background="{DynamicResource SolidBackgroundFillColorSecondaryBrush}">

@@ -40,6 +40,12 @@ Omezení: složka klíče „Windows User Account“ z KeePassu není podporovan
 - `%APPDATA%\RDPManager\connections.json` – spojení (bez hesel)
 - `%TEMP%\RDPManager\*.rdp` – dočasné soubory, mažou se automaticky
 
+## Verze a autor
+
+Verze je v `src/RDPManager/RDPManager.csproj` (`<Version>`) a zobrazuje se v Nastavení → O aplikaci, v tooltipu ikony v oznamovací oblasti a ve vlastnostech .exe.
+
+Autor: Jiri Nalepa – https://github.com/jirinalepa/RDPManager
+
 ## Struktura
 
 ```

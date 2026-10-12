@@ -29,6 +29,21 @@ public partial class SettingsWindow : FluentWindow
         MonitorBox.ItemsSource = monitors;
         MonitorBox.SelectedValue = monitors.Any(m => m.DeviceName == Result.MonitorDeviceName) ? Result.MonitorDeviceName : "";
         HotkeyBox.Text = Result.Hotkey;
+
+        AboutLogo.Source = AppIcon.ImageSource;
+        AboutProduct.Text = AppInfo.ProductWithVersion;
+        AboutCopyright.Text = AppInfo.Copyright;
+        AboutRepoText.Text = AppInfo.RepositoryUrl;
+    }
+
+    private void RepoLink_Click(object sender, RoutedEventArgs e) => AppInfo.OpenRepository();
+
+    private void SectionList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (SectionHost == null)
+            return;
+        for (var i = 0; i < SectionHost.Children.Count; i++)
+            SectionHost.Children[i].Visibility = i == SectionList.SelectedIndex ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public AppSettings Result { get; }

@@ -4,7 +4,7 @@
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:views="clr-namespace:RDPManager.Views"
                  Title="Nastavení"
-                 Width="560" Height="700" MinWidth="460" MinHeight="480"
+                 Width="720" Height="600" MinWidth="600" MinHeight="480"
                  ExtendsContentIntoTitleBar="True"
                  WindowBackdropType="None"
                  Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -21,88 +21,141 @@
 
         <ui:TitleBar Title="Nastavení" ShowMinimize="False" ShowMaximize="False" />
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="20,0,20,16">
-                <!-- Dock -->
-                <TextBlock Style="{StaticResource SectionHeader}" Margin="0,4,0,8" Text="Lišta" />
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Okraj obrazovky" />
-                <WrapPanel>
-                    <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Vlevo" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Left}" />
-                    <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Vpravo" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Right}" />
-                    <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Nahoře" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Top}" />
-                    <RadioButton GroupName="Edge" Content="Dole" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Bottom}" />
-                </WrapPanel>
-                <TextBlock Style="{StaticResource Hint}" Text="Horní okraj koliduje s lištou připojení mstsc. Na okraji sdíleném s jiným monitorem je potřeba myš chvíli podržet." />
+        <Grid Grid.Row="1" Margin="12,4,16,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Monitor" />
-                <ComboBox x:Name="MonitorBox" DisplayMemberPath="Label" SelectedValuePath="DeviceName" />
+            <!-- Section navigation -->
+            <ListBox x:Name="SectionList" Grid.Column="0" Margin="0,4,12,0" Background="Transparent" BorderThickness="0"
+                     SelectedIndex="0" SelectionChanged="SectionList_SelectionChanged">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Setter Property="Padding" Value="10,8" />
+                        <Setter Property="Margin" Value="0,0,0,2" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="PanelLeft24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Lišta" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Key24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="KeePass" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Settings24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Obecné" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Info24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="O aplikaci" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+            </ListBox>
 
-                <Grid Margin="0,4,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Margin="0,0,8,0">
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Šířka (px)" />
-                        <ui:TextBox Text="{Binding DockSize}" />
+            <Rectangle Grid.Column="0" Width="1" HorizontalAlignment="Right" Margin="0,4,0,0"
+                       Fill="{DynamicResource DividerStrokeColorDefaultBrush}" />
+
+            <!-- Sections -->
+            <Grid x:Name="SectionHost" Grid.Column="1" Margin="12,0,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="4,0,16,16">
+                        <TextBlock Style="{StaticResource SectionHeader}" Margin="0,4,0,8" Text="Lišta" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Okraj obrazovky" />
+                        <WrapPanel>
+                            <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Vlevo" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Left}" />
+                            <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Vpravo" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Right}" />
+                            <RadioButton GroupName="Edge" Margin="0,0,16,0" Content="Nahoře" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Top}" />
+                            <RadioButton GroupName="Edge" Content="Dole" IsChecked="{Binding Edge, Converter={StaticResource EnumEquals}, ConverterParameter=Bottom}" />
+                        </WrapPanel>
+                        <TextBlock Style="{StaticResource Hint}" Text="Horní okraj koliduje s lištou připojení mstsc. Na okraji sdíleném s jiným monitorem je potřeba myš chvíli podržet." />
+
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Monitor" />
+                        <ComboBox x:Name="MonitorBox" DisplayMemberPath="Label" SelectedValuePath="DeviceName" />
+
+                        <Grid Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,8,0">
+                                <TextBlock Style="{StaticResource FieldLabel}" Text="Šířka (px)" />
+                                <ui:TextBox Text="{Binding DockSize}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                                <TextBlock Style="{StaticResource FieldLabel}" Text="Vysunout po (ms)" />
+                                <ui:TextBox Text="{Binding ShowDelayMs}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Style="{StaticResource FieldLabel}" Text="Zasunout po (ms)" />
+                                <ui:TextBox Text="{Binding HideDelayMs}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <ui:ToggleSwitch Margin="0,14,0,0" Content="Po připojení lištu zasunout" IsChecked="{Binding HideAfterConnect}" />
+                        <ui:ToggleSwitch Margin="0,14,0,0" Content="Globální klávesová zkratka" IsChecked="{Binding HotkeyEnabled}" />
+                        <ui:TextBox x:Name="HotkeyBox" Margin="0,8,0,0" IsReadOnly="True" IsReadOnlyCaretVisible="True"
+                                    PreviewKeyDown="HotkeyBox_PreviewKeyDown"
+                                    IsEnabled="{Binding HotkeyEnabled}"
+                                    Icon="{ui:SymbolIcon Keyboard24}" />
+                        <TextBlock Style="{StaticResource Hint}" Text="Klikni do pole a stiskni kombinaci. Ve full-screen RDP zachytává klávesy vzdálená relace – tam lištu vyvoláš myší na okraji." />
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Margin="0,0,8,0">
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Vysunout po (ms)" />
-                        <ui:TextBox Text="{Binding ShowDelayMs}" />
+                </ScrollViewer>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                    <StackPanel Margin="4,0,16,16">
+                        <TextBlock Style="{StaticResource SectionHeader}" Margin="0,4,0,8" Text="KeePass" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Databáze (.kdbx)" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox Text="{Binding KeePassDatabasePath}" PlaceholderText="C:\...\Hesla.kdbx" />
+                            <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="…" Click="BrowseDatabase_Click" />
+                        </Grid>
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Soubor s klíčem (volitelné)" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox Text="{Binding KeePassKeyFilePath}" PlaceholderText="(žádný)" />
+                            <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="…" Click="BrowseKeyFile_Click" />
+                        </Grid>
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Automaticky zamknout po nečinnosti (minuty, 0 = nikdy)" />
+                        <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding KeePassAutoLockMinutes}" />
+                        <ui:ToggleSwitch Margin="0,14,0,0" Content="Zamknout při zamčení Windows (Win+L)" IsChecked="{Binding KeePassLockOnWorkstationLock}" />
                     </StackPanel>
-                    <StackPanel Grid.Column="2">
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Zasunout po (ms)" />
-                        <ui:TextBox Text="{Binding HideDelayMs}" />
+                </ScrollViewer>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                    <StackPanel Margin="4,0,16,16">
+                        <TextBlock Style="{StaticResource SectionHeader}" Margin="0,4,0,8" Text="Obecné" />
+                        <ui:ToggleSwitch Content="Spouštět s Windows" IsChecked="{Binding StartWithWindows}" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Vzhled" />
+                        <WrapPanel>
+                            <RadioButton GroupName="Theme" Margin="0,0,16,0" Content="Podle systému" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=System}" />
+                            <RadioButton GroupName="Theme" Margin="0,0,16,0" Content="Světlý" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=Light}" />
+                            <RadioButton GroupName="Theme" Content="Tmavý" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=Dark}" />
+                        </WrapPanel>
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Smazat dočasné pověření po (sekundy)" />
+                        <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding CredentialCleanupSeconds}" />
+                        <TextBlock Style="{StaticResource Hint}" Text="Jak dlouho zůstane heslo z KeePassu ve Správci pověření Windows, než si ho mstsc přečte. Prodluž, pokud se přihlášení nestihne (např. dlouho potvrzuješ certifikát)." />
                     </StackPanel>
-                </Grid>
+                </ScrollViewer>
 
-                <ui:ToggleSwitch Margin="0,14,0,0" Content="Po připojení lištu zasunout" IsChecked="{Binding HideAfterConnect}" />
-                <ui:ToggleSwitch Margin="0,14,0,0" Content="Globální klávesová zkratka" IsChecked="{Binding HotkeyEnabled}" />
-                <ui:TextBox x:Name="HotkeyBox" Margin="0,8,0,0" IsReadOnly="True" IsReadOnlyCaretVisible="True"
-                            PreviewKeyDown="HotkeyBox_PreviewKeyDown"
-                            IsEnabled="{Binding HotkeyEnabled}"
-                            Icon="{ui:SymbolIcon Keyboard24}" />
-                <TextBlock Style="{StaticResource Hint}" Text="Klikni do pole a stiskni kombinaci. Ve full-screen RDP zachytává klávesy vzdálená relace – tam lištu vyvoláš myší na okraji." />
-
-                <!-- KeePass -->
-                <TextBlock Style="{StaticResource SectionHeader}" Text="KeePass" />
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Databáze (.kdbx)" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ui:TextBox Text="{Binding KeePassDatabasePath}" PlaceholderText="C:\...\Hesla.kdbx" />
-                    <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="…" Click="BrowseDatabase_Click" />
-                </Grid>
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Soubor s klíčem (volitelné)" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ui:TextBox Text="{Binding KeePassKeyFilePath}" PlaceholderText="(žádný)" />
-                    <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="…" Click="BrowseKeyFile_Click" />
-                </Grid>
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Automaticky zamknout po nečinnosti (minuty, 0 = nikdy)" />
-                <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding KeePassAutoLockMinutes}" />
-                <ui:ToggleSwitch Margin="0,14,0,0" Content="Zamknout při zamčení Windows (Win+L)" IsChecked="{Binding KeePassLockOnWorkstationLock}" />
-
-                <!-- General -->
-                <TextBlock Style="{StaticResource SectionHeader}" Text="Obecné" />
-                <ui:ToggleSwitch Content="Spouštět s Windows" IsChecked="{Binding StartWithWindows}" />
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Vzhled" />
-                <WrapPanel>
-                    <RadioButton GroupName="Theme" Margin="0,0,16,0" Content="Podle systému" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=System}" />
-                    <RadioButton GroupName="Theme" Margin="0,0,16,0" Content="Světlý" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=Light}" />
-                    <RadioButton GroupName="Theme" Content="Tmavý" IsChecked="{Binding Theme, Converter={StaticResource EnumEquals}, ConverterParameter=Dark}" />
-                </WrapPanel>
-                <TextBlock Style="{StaticResource FieldLabel}" Text="Smazat dočasné pověření po (sekundy)" />
-                <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding CredentialCleanupSeconds}" />
-                <TextBlock Style="{StaticResource Hint}" Text="Jak dlouho zůstane heslo z KeePassu ve Správci pověření Windows, než si ho mstsc přečte. Prodluž, pokud se přihlášení nestihne (např. dlouho potvrzuješ certifikát)." />
-            </StackPanel>
-        </ScrollViewer>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                    <StackPanel Margin="4,0,16,16">
+                        <TextBlock Style="{StaticResource SectionHeader}" Margin="0,4,0,8" Text="O aplikaci" />
+                        <Border Padding="14" CornerRadius="8" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="AboutLogo" Width="40" Height="40" VerticalAlignment="Top" />
+                                <StackPanel Margin="14,0,0,0">
+                                    <TextBlock x:Name="AboutProduct" FontSize="15" FontWeight="SemiBold" />
+                                    <TextBlock x:Name="AboutCopyright" Margin="0,2,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock Margin="0,6,0,0">
+                                        <Hyperlink x:Name="AboutRepoLink" Click="RepoLink_Click">
+                                            <Run x:Name="AboutRepoText" />
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
 
         <Border Grid.Row="2" Padding="16,12" Background="{DynamicResource SolidBackgroundFillColorSecondaryBrush}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

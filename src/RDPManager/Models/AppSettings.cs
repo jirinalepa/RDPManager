@@ -23,7 +23,7 @@ public class AppSettings
     public string MonitorDeviceName { get; set; } = "";
     /// <summary>Panel width in DIPs.</summary>
     public int DockSize { get; set; } = 300;
-    public int ShowDelayMs { get; set; } = 250;
+    public int ShowDelayMs { get; set; } = 100;
     public int HideDelayMs { get; set; } = 700;
     public bool HideAfterConnect { get; set; } = true;
     public bool HotkeyEnabled { get; set; } = true;
