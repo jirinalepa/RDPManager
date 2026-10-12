@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>  <data name="Common_Save" xml:space="preserve"><value>Uložit</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Zrušit</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Delete" xml:space="preserve"><value>Smazat</value></data>
+  <data name="Common_None" xml:space="preserve"><value>(žádný)</value></data>
+  <data name="Common_SystemDefault" xml:space="preserve"><value>Podle systému</value></data>
+  <data name="Common_KeyFileOptional" xml:space="preserve"><value>Soubor s klíčem (volitelné)</value></data>
+  <data name="Common_KeyFile" xml:space="preserve"><value>Soubor s klíčem</value></data>
+  <data name="Common_AllFilesFilter" xml:space="preserve"><value>Všechny soubory|*.*</value></data>
+  <data name="Common_KeePassDatabase" xml:space="preserve"><value>KeePass databáze</value></data>
+  <data name="Group_None" xml:space="preserve"><value>Bez skupiny</value></data>
+  <data name="Dock_Menu_Connect" xml:space="preserve"><value>Připojit</value></data>
+  <data name="Dock_Menu_ConnectAdmin" xml:space="preserve"><value>Připojit jako admin (/admin)</value></data>
+  <data name="Dock_Menu_Edit" xml:space="preserve"><value>Upravit…</value></data>
+  <data name="Dock_Menu_Duplicate" xml:space="preserve"><value>Duplikovat</value></data>
+  <data name="Dock_Menu_CopyAddress" xml:space="preserve"><value>Kopírovat adresu</value></data>
+  <data name="Dock_Pin_Tooltip" xml:space="preserve"><value>Připnout lištu (nezasouvat)</value></data>
+  <data name="Dock_Search_Placeholder" xml:space="preserve"><value>Hledat (Ctrl+F)…</value></data>
+  <data name="Dock_Empty" xml:space="preserve"><value>Zatím žádná spojení. Přidej první tlačítkem Nové dole, nebo importuj .rdp soubory.</value></data>
+  <data name="Dock_ActiveSessions" xml:space="preserve"><value>AKTIVNÍ RELACE</value></data>
+  <data name="Dock_Session_Tooltip" xml:space="preserve"><value>Přepnout na relaci</value></data>
+  <data name="Dock_Session_Since" xml:space="preserve"><value>od {0}</value></data>
+  <data name="Dock_Disconnect_Tooltip" xml:space="preserve"><value>Odpojit</value></data>
+  <data name="Dock_New" xml:space="preserve"><value>Nové</value></data>
+  <data name="Dock_New_Tooltip" xml:space="preserve"><value>Nové spojení</value></data>
+  <data name="Dock_LockKeePass_Tooltip" xml:space="preserve"><value>Zamknout KeePass</value></data>
+  <data name="Dock_Settings_Tooltip" xml:space="preserve"><value>Nastavení</value></data>
+  <data name="Dock_HotkeyFailed" xml:space="preserve"><value>Klávesovou zkratku {0} se nepodařilo zaregistrovat – nejspíš ji už používá jiná aplikace.</value></data>
+  <data name="Import_Title" xml:space="preserve"><value>Importovat .rdp soubory</value></data>
+  <data name="Import_MissingAddress" xml:space="preserve"><value>{0}: chybí adresa</value></data>
+  <data name="Import_Errors" xml:space="preserve"><value>Některé soubory se nepodařilo importovat:
+{0}</value></data>
+  <data name="Tray_ShowPanel" xml:space="preserve"><value>Zobrazit lištu</value></data>
+  <data name="Tray_NewConnection" xml:space="preserve"><value>Nové spojení…</value></data>
+  <data name="Tray_Import" xml:space="preserve"><value>Importovat .rdp soubory…</value></data>
+  <data name="Tray_Settings" xml:space="preserve"><value>Nastavení…</value></data>
+  <data name="Tray_About" xml:space="preserve"><value>O aplikaci ({0})</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>Ukončit</value></data>
+  <data name="Tray_Balloon" xml:space="preserve"><value>Lišta je připravená – najeď myší na okraj obrazovky nebo stiskni {0}.</value></data>
+  <data name="Error_Unexpected" xml:space="preserve"><value>Neočekávaná chyba: {0}</value></data>
+  <data name="Error_NoKeePassEntry" xml:space="preserve"><value>Spojení „{0}“ nemá vybraný záznam z KeePassu.</value></data>
+  <data name="Error_KeePassEntryMissing" xml:space="preserve"><value>Záznam „{0}“ už v KeePass databázi neexistuje.</value></data>
+  <data name="Error_ConnectFailed" xml:space="preserve"><value>Připojení k {0} se nezdařilo:
+{1}</value></data>
+  <data name="Error_KeePassPathNotSet" xml:space="preserve"><value>Nejdřív nastav cestu ke KeePass databázi (Nastavení → KeePass).</value></data>
+  <data name="Error_Autostart" xml:space="preserve"><value>Nepodařilo se nastavit spouštění s Windows: {0}</value></data>
+  <data name="Error_SaveConnections" xml:space="preserve"><value>Uložení spojení selhalo: {0}</value></data>
+  <data name="Error_KeePassDatabaseNotFound" xml:space="preserve"><value>KeePass databáze nebyla nalezena. Zkontroluj cestu v nastavení.</value></data>
+  <data name="Error_KeePassLocked" xml:space="preserve"><value>KeePass databáze je zamčená.</value></data>
+  <data name="Error_CredentialWrite" xml:space="preserve"><value>Nelze zapsat pověření pro {0}.</value></data>
+  <data name="Error_MstscStart" xml:space="preserve"><value>mstsc.exe se nepodařilo spustit.</value></data>
+  <data name="Prompt_ForeignCredential" xml:space="preserve"><value>Pro {0} už je ve Windows uložené pověření (Správce pověření).
+
+„Použít KeePass“ ho nahradí údaji z KeePassu a po připojení ho odstraní.
+„Ponechat uložené“ použije stávající uložené pověření.</value></data>
+  <data name="Prompt_UseKeePass" xml:space="preserve"><value>Použít KeePass</value></data>
+  <data name="Prompt_KeepSaved" xml:space="preserve"><value>Ponechat uložené</value></data>
+  <data name="Prompt_DeleteConnection" xml:space="preserve"><value>Opravdu smazat spojení „{0}“?</value></data>
+  <data name="Prompt_RestartForLanguage" xml:space="preserve"><value>Jazyk se změní po restartu aplikace. Restartovat nyní?</value></data>
+  <data name="Prompt_Restart" xml:space="preserve"><value>Restartovat</value></data>
+  <data name="Connection_CopySuffix" xml:space="preserve"><value> (kopie)</value></data>
+  <data name="Editor_TitleNew" xml:space="preserve"><value>Nové spojení</value></data>
+  <data name="Editor_TitleEdit" xml:space="preserve"><value>Upravit – {0}</value></data>
+  <data name="Editor_Nav_General" xml:space="preserve"><value>Obecné</value></data>
+  <data name="Editor_Nav_SignIn" xml:space="preserve"><value>Přihlášení</value></data>
+  <data name="Editor_Nav_Display" xml:space="preserve"><value>Obrazovka</value></data>
+  <data name="Editor_Nav_Redirection" xml:space="preserve"><value>Přesměrování</value></data>
+  <data name="Editor_Nav_Advanced" xml:space="preserve"><value>Pokročilé</value></data>
+  <data name="Editor_Name" xml:space="preserve"><value>Název</value></data>
+  <data name="Editor_Name_Placeholder" xml:space="preserve"><value>např. Souborový server</value></data>
+  <data name="Editor_Host" xml:space="preserve"><value>Adresa (hostname nebo IP)</value></data>
+  <data name="Editor_Host_Placeholder" xml:space="preserve"><value>server.firma.local</value></data>
+  <data name="Editor_Port" xml:space="preserve"><value>Port</value></data>
+  <data name="Editor_Group" xml:space="preserve"><value>Skupina</value></data>
+  <data name="Editor_Notes" xml:space="preserve"><value>Poznámka</value></data>
+  <data name="Editor_SignInMethod" xml:space="preserve"><value>Způsob přihlášení</value></data>
+  <data name="Editor_Mode_Default" xml:space="preserve"><value>Doménový / aktuální účet (mstsc použije uložené údaje nebo se zeptá)</value></data>
+  <data name="Editor_Mode_Username" xml:space="preserve"><value>Jen přednastavené uživatelské jméno</value></data>
+  <data name="Editor_Mode_KeePass" xml:space="preserve"><value>Jméno a heslo z KeePassu</value></data>
+  <data name="Editor_KeePassEntry" xml:space="preserve"><value>Záznam v KeePassu</value></data>
+  <data name="Editor_NotSelected" xml:space="preserve"><value>(nevybráno)</value></data>
+  <data name="Editor_Pick" xml:space="preserve"><value>Vybrat…</value></data>
+  <data name="Editor_Username" xml:space="preserve"><value>Uživatelské jméno</value></data>
+  <data name="Editor_UsernameOverride" xml:space="preserve"><value>Přepsat uživatelské jméno (volitelné)</value></data>
+  <data name="Editor_Username_Placeholder" xml:space="preserve"><value>DOMENA\uzivatel nebo uzivatel@domena</value></data>
+  <data name="Editor_Hint_KeePass" xml:space="preserve"><value>Prázdné = použije se jméno ze záznamu v KeePassu.</value></data>
+  <data name="Editor_Hint_Default" xml:space="preserve"><value>Volitelné. Pro přihlášení bez dotazu doménovým účtem musí politika povolit delegování výchozích pověření.</value></data>
+  <data name="Editor_Hint_Username" xml:space="preserve"><value>Heslo zadáš v okně připojení.</value></data>
+  <data name="Editor_FullScreen" xml:space="preserve"><value>Celá obrazovka</value></data>
+  <data name="Editor_Multimon" xml:space="preserve"><value>Použít více monitorů</value></data>
+  <data name="Editor_SelectedMonitors" xml:space="preserve"><value>Vybrané monitory (volitelné)</value></data>
+  <data name="Editor_SelectedMonitors_Placeholder" xml:space="preserve"><value>např. 0,1</value></data>
+  <data name="Editor_SelectedMonitors_Hint" xml:space="preserve"><value>ID monitorů zobrazí příkaz „mstsc /l“. Prázdné = všechny.</value></data>
+  <data name="Editor_WindowSize" xml:space="preserve"><value>Velikost okna (když není celá obrazovka)</value></data>
+  <data name="Editor_Clipboard" xml:space="preserve"><value>Schránka</value></data>
+  <data name="Editor_Drives" xml:space="preserve"><value>Lokální disky</value></data>
+  <data name="Editor_Printers" xml:space="preserve"><value>Tiskárny</value></data>
+  <data name="Editor_Audio" xml:space="preserve"><value>Zvuk</value></data>
+  <data name="Editor_Audio_Local" xml:space="preserve"><value>Přehrávat na tomto počítači</value></data>
+  <data name="Editor_Audio_Remote" xml:space="preserve"><value>Přehrávat na vzdáleném počítači</value></data>
+  <data name="Editor_Audio_None" xml:space="preserve"><value>Nepřehrávat</value></data>
+  <data name="Editor_Admin" xml:space="preserve"><value>Administrátorská relace (/admin)</value></data>
+  <data name="Editor_Gateway" xml:space="preserve"><value>RD Gateway (volitelné)</value></data>
+  <data name="Editor_Gateway_Placeholder" xml:space="preserve"><value>gateway.firma.cz</value></data>
+  <data name="Editor_Gateway_Hint" xml:space="preserve"><value>Při přihlášení z KeePassu se stejné údaje použijí i pro gateway.</value></data>
+  <data name="Editor_ExtraSettings" xml:space="preserve"><value>Další nastavení .rdp (přepíší vygenerovaná)</value></data>
+  <data name="Editor_ExtraSettings_Placeholder" xml:space="preserve"><value>např. smart sizing:i:1</value></data>
+  <data name="Editor_Error_Host" xml:space="preserve"><value>Vyplň adresu serveru.</value></data>
+  <data name="Editor_Error_Port" xml:space="preserve"><value>Port musí být v rozsahu 1–65535.</value></data>
+  <data name="Editor_Error_KeePassEntry" xml:space="preserve"><value>Vyber záznam z KeePassu, nebo zvol jiný způsob přihlášení.</value></data>
+  <data name="Unlock_Title" xml:space="preserve"><value>Odemknout KeePass</value></data>
+  <data name="Unlock_MasterPassword" xml:space="preserve"><value>Hlavní heslo</value></data>
+  <data name="Unlock_Button" xml:space="preserve"><value>Odemknout</value></data>
+  <data name="Unlock_Error_Empty" xml:space="preserve"><value>Zadej hlavní heslo nebo soubor s klíčem.</value></data>
+  <data name="Unlock_Error_WrongKey" xml:space="preserve"><value>Nesprávné heslo nebo soubor s klíčem.</value></data>
+  <data name="Unlock_Error_Open" xml:space="preserve"><value>Databázi se nepodařilo otevřít: {0}</value></data>
+  <data name="Picker_Title" xml:space="preserve"><value>Vybrat záznam z KeePassu</value></data>
+  <data name="Picker_Search_Placeholder" xml:space="preserve"><value>Hledat v názvu, jménu, URL a skupině…</value></data>
+  <data name="Picker_Count" xml:space="preserve"><value>{0} z {1} záznamů</value></data>
+  <data name="Picker_Select" xml:space="preserve"><value>Vybrat</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Nastavení</value></data>
+  <data name="Settings_Nav_Dock" xml:space="preserve"><value>Lišta</value></data>
+  <data name="Settings_Nav_KeePass" xml:space="preserve"><value>KeePass</value></data>
+  <data name="Settings_Nav_General" xml:space="preserve"><value>Obecné</value></data>
+  <data name="Settings_Nav_About" xml:space="preserve"><value>O aplikaci</value></data>
+  <data name="Settings_Edge" xml:space="preserve"><value>Okraj obrazovky</value></data>
+  <data name="Settings_Edge_Left" xml:space="preserve"><value>Vlevo</value></data>
+  <data name="Settings_Edge_Right" xml:space="preserve"><value>Vpravo</value></data>
+  <data name="Settings_Edge_Top" xml:space="preserve"><value>Nahoře</value></data>
+  <data name="Settings_Edge_Bottom" xml:space="preserve"><value>Dole</value></data>
+  <data name="Settings_Edge_Hint" xml:space="preserve"><value>Horní okraj koliduje s lištou připojení mstsc. Na okraji sdíleném s jiným monitorem je potřeba myš chvíli podržet.</value></data>
+  <data name="Settings_Monitor" xml:space="preserve"><value>Monitor</value></data>
+  <data name="Settings_Monitor_Primary" xml:space="preserve"><value>Hlavní monitor</value></data>
+  <data name="Settings_Monitor_Item" xml:space="preserve"><value>Monitor {0} – {1}×{2}</value></data>
+  <data name="Settings_Monitor_PrimarySuffix" xml:space="preserve"><value> (hlavní)</value></data>
+  <data name="Settings_Width" xml:space="preserve"><value>Šířka (px)</value></data>
+  <data name="Settings_ShowDelay" xml:space="preserve"><value>Vysunout po (ms)</value></data>
+  <data name="Settings_HideDelay" xml:space="preserve"><value>Zasunout po (ms)</value></data>
+  <data name="Settings_HideAfterConnect" xml:space="preserve"><value>Po připojení lištu zasunout</value></data>
+  <data name="Settings_Hotkey" xml:space="preserve"><value>Globální klávesová zkratka</value></data>
+  <data name="Settings_Hotkey_Hint" xml:space="preserve"><value>Klikni do pole a stiskni kombinaci. Ve full-screen RDP zachytává klávesy vzdálená relace – tam lištu vyvoláš myší na okraji.</value></data>
+  <data name="Settings_Error_Hotkey" xml:space="preserve"><value>Klávesová zkratka musí obsahovat modifikátor (Ctrl/Alt/Shift/Win) a klávesu.</value></data>
+  <data name="Settings_KeePassDatabase" xml:space="preserve"><value>Databáze (.kdbx)</value></data>
+  <data name="Settings_KeePassDatabase_Placeholder" xml:space="preserve"><value>C:\...\Hesla.kdbx</value></data>
+  <data name="Settings_KeePassFilter" xml:space="preserve"><value>KeePass (*.kdbx)|*.kdbx|Všechny soubory|*.*</value></data>
+  <data name="Settings_AutoLock" xml:space="preserve"><value>Automaticky zamknout po nečinnosti (minuty, 0 = nikdy)</value></data>
+  <data name="Settings_LockOnWinL" xml:space="preserve"><value>Zamknout při zamčení Windows (Win+L)</value></data>
+  <data name="Settings_StartWithWindows" xml:space="preserve"><value>Spouštět s Windows</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Jazyk</value></data>
+  <data name="Settings_Theme" xml:space="preserve"><value>Vzhled</value></data>
+  <data name="Settings_Theme_Light" xml:space="preserve"><value>Světlý</value></data>
+  <data name="Settings_Theme_Dark" xml:space="preserve"><value>Tmavý</value></data>
+  <data name="Settings_CredentialCleanup" xml:space="preserve"><value>Smazat dočasné pověření po (sekundy)</value></data>
+  <data name="Settings_CredentialCleanup_Hint" xml:space="preserve"><value>Jak dlouho zůstane heslo z KeePassu ve Správci pověření Windows, než si ho mstsc přečte. Prodluž, pokud se přihlášení nestihne (např. dlouho potvrzuješ certifikát).</value></data>
+</root>

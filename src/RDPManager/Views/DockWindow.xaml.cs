@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using RDPManager.Docking;
 using RDPManager.Models;
+using RDPManager.Properties;
 using RDPManager.Services;
 using RDPManager.ViewModels;
 
@@ -84,7 +85,7 @@ public partial class DockWindow : Window, IDisposable
             return;
         _hotkeyRegistered = NativeMethods.RegisterHotKey(hwnd, HotkeyId, gesture.NativeModifiers, gesture.VirtualKey);
         if (!_hotkeyRegistered)
-            _ = Dialogs.ErrorAsync($"Klávesovou zkratku {gesture} se nepodařilo zaregistrovat – nejspíš ji už používá jiná aplikace.");
+            _ = Dialogs.ErrorAsync(Localization.Format(Strings.Dock_HotkeyFailed, gesture));
     }
 
     private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

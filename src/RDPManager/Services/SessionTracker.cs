@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using RDPManager.Docking;
 using RDPManager.Models;
+using RDPManager.Properties;
 
 namespace RDPManager.Services;
 
@@ -17,7 +18,7 @@ public class RdpSession
     public Connection Connection { get; }
     public Process Process { get; }
     public DateTime StartedAt { get; } = DateTime.Now;
-    public string StartedAtText => StartedAt.ToString("HH:mm");
+    public string StartedAtText => Localization.Format(Strings.Dock_Session_Since, StartedAt.ToString("HH:mm"));
 }
 
 /// <summary>Keeps the list of mstsc processes started by this app.</summary>

@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
+using RDPManager.Properties;
 
 namespace RDPManager.Services;
 
@@ -61,7 +62,7 @@ public static class CredentialInjector
                 UserName = userName,
             };
             if (!CredWrite(ref cred, 0))
-                throw new Win32Exception(Marshal.GetLastWin32Error(), $"Nelze zapsat pověření pro {target}.");
+                throw new Win32Exception(Marshal.GetLastWin32Error(), Localization.Format(Strings.Error_CredentialWrite, target));
             lock (RefCounts)
                 RefCounts[target] = RefCounts.GetValueOrDefault(target) + 1;
         }

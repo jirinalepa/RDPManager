@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using RDPManager.Models;
+using RDPManager.Properties;
 
 namespace RDPManager.Services;
 
@@ -46,7 +47,7 @@ public class RdpLauncher
                 FileName = Path.Combine(Environment.SystemDirectory, "mstsc.exe"),
                 Arguments = $"\"{rdpPath}\"",
                 UseShellExecute = false,
-            }) ?? throw new InvalidOperationException("mstsc.exe se nepodařilo spustit.");
+            }) ?? throw new InvalidOperationException(Strings.Error_MstscStart);
 
             var session = new RdpSession(connection, process);
             _sessions.Add(session);

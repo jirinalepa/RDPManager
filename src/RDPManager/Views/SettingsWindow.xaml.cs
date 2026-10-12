@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using RDPManager.Docking;
 using RDPManager.Models;
+using RDPManager.Properties;
 using Wpf.Ui.Controls;
 
 namespace RDPManager.Views;
@@ -18,13 +19,13 @@ public partial class SettingsWindow : FluentWindow
         Result = JsonSerializer.Deserialize<AppSettings>(JsonSerializer.Serialize(settings))!;
         DataContext = Result;
 
-        var monitors = new List<MonitorOption> { new("", "Hlavní monitor") };
+        var monitors = new List<MonitorOption> { new("", Strings.Settings_Monitor_Primary) };
         var index = 1;
         foreach (var s in EdgeDockController.Screens)
         {
             var b = s.Bounds;
             monitors.Add(new MonitorOption(s.DeviceName,
-                $"Monitor {index++} – {b.Width}×{b.Height}{(s.Primary ? " (hlavní)" : "")}"));
+                Localization.Format(Strings.Settings_Monitor_Item, index++, b.Width, b.Height) + (s.Primary ? Strings.Settings_Monitor_PrimarySuffix : "")));
         }
         MonitorBox.ItemsSource = monitors;
         MonitorBox.SelectedValue = monitors.Any(m => m.DeviceName == Result.MonitorDeviceName) ? Result.MonitorDeviceName : "";
@@ -61,7 +62,7 @@ public partial class SettingsWindow : FluentWindow
 
     private void BrowseDatabase_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new Microsoft.Win32.OpenFileDialog { Title = "KeePass databáze", Filter = "KeePass (*.kdbx)|*.kdbx|Všechny soubory|*.*" };
+        var dialog = new Microsoft.Win32.OpenFileDialog { Title = Strings.Common_KeePassDatabase, Filter = Strings.Settings_KeePassFilter };
         if (dialog.ShowDialog(this) == true)
         {
             Result.KeePassDatabasePath = dialog.FileName;
@@ -71,7 +72,7 @@ public partial class SettingsWindow : FluentWindow
 
     private void BrowseKeyFile_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new Microsoft.Win32.OpenFileDialog { Title = "Soubor s klíčem", Filter = "Všechny soubory|*.*" };
+        var dialog = new Microsoft.Win32.OpenFileDialog { Title = Strings.Common_KeyFile, Filter = Strings.Common_AllFilesFilter };
         if (dialog.ShowDialog(this) == true)
         {
             Result.KeePassKeyFilePath = dialog.FileName;
@@ -90,7 +91,7 @@ public partial class SettingsWindow : FluentWindow
     {
         if (Result.HotkeyEnabled && HotkeyGesture.Parse(HotkeyBox.Text) == null)
         {
-            await Dialogs.ErrorAsync("Klávesová zkratka musí obsahovat modifikátor (Ctrl/Alt/Shift/Win) a klávesu.");
+            await Dialogs.ErrorAsync(Strings.Settings_Error_Hotkey);
             return;
         }
         Result.Hotkey = HotkeyBox.Text;

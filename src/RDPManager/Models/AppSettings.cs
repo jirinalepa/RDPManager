@@ -15,6 +15,14 @@ public enum AppTheme
     Dark,
 }
 
+public enum AppLanguage
+{
+    /// <summary>Czech when Windows uses Czech, otherwise English.</summary>
+    System,
+    English,
+    Czech,
+}
+
 public class AppSettings
 {
     // Dock
@@ -38,6 +46,7 @@ public class AppSettings
     // General
     public bool StartWithWindows { get; set; }
     public AppTheme Theme { get; set; } = AppTheme.System;
+    public AppLanguage Language { get; set; } = AppLanguage.System;
     /// <summary>How long injected credentials stay in Windows Credential Manager after mstsc starts.</summary>
     public int CredentialCleanupSeconds { get; set; } = 60;
 }

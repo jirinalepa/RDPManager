@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>  <data name="Common_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Common_None" xml:space="preserve"><value>(none)</value></data>
+  <data name="Common_SystemDefault" xml:space="preserve"><value>System default</value></data>
+  <data name="Common_KeyFileOptional" xml:space="preserve"><value>Key file (optional)</value></data>
+  <data name="Common_KeyFile" xml:space="preserve"><value>Key file</value></data>
+  <data name="Common_AllFilesFilter" xml:space="preserve"><value>All files|*.*</value></data>
+  <data name="Common_KeePassDatabase" xml:space="preserve"><value>KeePass database</value></data>
+  <data name="Group_None" xml:space="preserve"><value>No group</value></data>
+  <data name="Dock_Menu_Connect" xml:space="preserve"><value>Connect</value></data>
+  <data name="Dock_Menu_ConnectAdmin" xml:space="preserve"><value>Connect as admin (/admin)</value></data>
+  <data name="Dock_Menu_Edit" xml:space="preserve"><value>Edit…</value></data>
+  <data name="Dock_Menu_Duplicate" xml:space="preserve"><value>Duplicate</value></data>
+  <data name="Dock_Menu_CopyAddress" xml:space="preserve"><value>Copy address</value></data>
+  <data name="Dock_Pin_Tooltip" xml:space="preserve"><value>Pin the panel (keep it open)</value></data>
+  <data name="Dock_Search_Placeholder" xml:space="preserve"><value>Search (Ctrl+F)…</value></data>
+  <data name="Dock_Empty" xml:space="preserve"><value>No connections yet. Add the first one with the New button below, or import .rdp files.</value></data>
+  <data name="Dock_ActiveSessions" xml:space="preserve"><value>ACTIVE SESSIONS</value></data>
+  <data name="Dock_Session_Tooltip" xml:space="preserve"><value>Switch to the session</value></data>
+  <data name="Dock_Session_Since" xml:space="preserve"><value>since {0}</value></data>
+  <data name="Dock_Disconnect_Tooltip" xml:space="preserve"><value>Disconnect</value></data>
+  <data name="Dock_New" xml:space="preserve"><value>New</value></data>
+  <data name="Dock_New_Tooltip" xml:space="preserve"><value>New connection</value></data>
+  <data name="Dock_LockKeePass_Tooltip" xml:space="preserve"><value>Lock KeePass</value></data>
+  <data name="Dock_Settings_Tooltip" xml:space="preserve"><value>Settings</value></data>
+  <data name="Dock_HotkeyFailed" xml:space="preserve"><value>The hotkey {0} could not be registered – it is probably used by another application.</value></data>
+  <data name="Import_Title" xml:space="preserve"><value>Import .rdp files</value></data>
+  <data name="Import_MissingAddress" xml:space="preserve"><value>{0}: address is missing</value></data>
+  <data name="Import_Errors" xml:space="preserve"><value>Some files could not be imported:
+{0}</value></data>
+  <data name="Tray_ShowPanel" xml:space="preserve"><value>Show panel</value></data>
+  <data name="Tray_NewConnection" xml:space="preserve"><value>New connection…</value></data>
+  <data name="Tray_Import" xml:space="preserve"><value>Import .rdp files…</value></data>
+  <data name="Tray_Settings" xml:space="preserve"><value>Settings…</value></data>
+  <data name="Tray_About" xml:space="preserve"><value>About ({0})</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>Exit</value></data>
+  <data name="Tray_Balloon" xml:space="preserve"><value>The panel is ready – move the mouse to the screen edge or press {0}.</value></data>
+  <data name="Error_Unexpected" xml:space="preserve"><value>Unexpected error: {0}</value></data>
+  <data name="Error_NoKeePassEntry" xml:space="preserve"><value>The connection “{0}” has no KeePass entry selected.</value></data>
+  <data name="Error_KeePassEntryMissing" xml:space="preserve"><value>The entry “{0}” no longer exists in the KeePass database.</value></data>
+  <data name="Error_ConnectFailed" xml:space="preserve"><value>Connecting to {0} failed:
+{1}</value></data>
+  <data name="Error_KeePassPathNotSet" xml:space="preserve"><value>Set the path to the KeePass database first (Settings → KeePass).</value></data>
+  <data name="Error_Autostart" xml:space="preserve"><value>Could not configure starting with Windows: {0}</value></data>
+  <data name="Error_SaveConnections" xml:space="preserve"><value>Saving connections failed: {0}</value></data>
+  <data name="Error_KeePassDatabaseNotFound" xml:space="preserve"><value>KeePass database not found. Check the path in settings.</value></data>
+  <data name="Error_KeePassLocked" xml:space="preserve"><value>The KeePass database is locked.</value></data>
+  <data name="Error_CredentialWrite" xml:space="preserve"><value>Could not write the credential for {0}.</value></data>
+  <data name="Error_MstscStart" xml:space="preserve"><value>Could not start mstsc.exe.</value></data>
+  <data name="Prompt_ForeignCredential" xml:space="preserve"><value>Windows already has a saved credential for {0} (Credential Manager).
+
+“Use KeePass” replaces it with the KeePass credentials and removes it after connecting.
+“Keep saved” uses the existing saved credential.</value></data>
+  <data name="Prompt_UseKeePass" xml:space="preserve"><value>Use KeePass</value></data>
+  <data name="Prompt_KeepSaved" xml:space="preserve"><value>Keep saved</value></data>
+  <data name="Prompt_DeleteConnection" xml:space="preserve"><value>Really delete the connection “{0}”?</value></data>
+  <data name="Prompt_RestartForLanguage" xml:space="preserve"><value>The language will change after the application restarts. Restart now?</value></data>
+  <data name="Prompt_Restart" xml:space="preserve"><value>Restart</value></data>
+  <data name="Connection_CopySuffix" xml:space="preserve"><value> (copy)</value></data>
+  <data name="Editor_TitleNew" xml:space="preserve"><value>New connection</value></data>
+  <data name="Editor_TitleEdit" xml:space="preserve"><value>Edit – {0}</value></data>
+  <data name="Editor_Nav_General" xml:space="preserve"><value>General</value></data>
+  <data name="Editor_Nav_SignIn" xml:space="preserve"><value>Sign-in</value></data>
+  <data name="Editor_Nav_Display" xml:space="preserve"><value>Display</value></data>
+  <data name="Editor_Nav_Redirection" xml:space="preserve"><value>Redirection</value></data>
+  <data name="Editor_Nav_Advanced" xml:space="preserve"><value>Advanced</value></data>
+  <data name="Editor_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Editor_Name_Placeholder" xml:space="preserve"><value>e.g. File server</value></data>
+  <data name="Editor_Host" xml:space="preserve"><value>Address (hostname or IP)</value></data>
+  <data name="Editor_Host_Placeholder" xml:space="preserve"><value>server.company.local</value></data>
+  <data name="Editor_Port" xml:space="preserve"><value>Port</value></data>
+  <data name="Editor_Group" xml:space="preserve"><value>Group</value></data>
+  <data name="Editor_Notes" xml:space="preserve"><value>Notes</value></data>
+  <data name="Editor_SignInMethod" xml:space="preserve"><value>Sign-in method</value></data>
+  <data name="Editor_Mode_Default" xml:space="preserve"><value>Domain / current account (mstsc uses saved credentials or asks)</value></data>
+  <data name="Editor_Mode_Username" xml:space="preserve"><value>Pre-filled user name only</value></data>
+  <data name="Editor_Mode_KeePass" xml:space="preserve"><value>User name and password from KeePass</value></data>
+  <data name="Editor_KeePassEntry" xml:space="preserve"><value>KeePass entry</value></data>
+  <data name="Editor_NotSelected" xml:space="preserve"><value>(not selected)</value></data>
+  <data name="Editor_Pick" xml:space="preserve"><value>Select…</value></data>
+  <data name="Editor_Username" xml:space="preserve"><value>User name</value></data>
+  <data name="Editor_UsernameOverride" xml:space="preserve"><value>Override user name (optional)</value></data>
+  <data name="Editor_Username_Placeholder" xml:space="preserve"><value>DOMAIN\user or user@domain</value></data>
+  <data name="Editor_Hint_KeePass" xml:space="preserve"><value>Empty = the user name from the KeePass entry is used.</value></data>
+  <data name="Editor_Hint_Default" xml:space="preserve"><value>Optional. Signing in with the domain account without a prompt requires a policy that allows delegating default credentials.</value></data>
+  <data name="Editor_Hint_Username" xml:space="preserve"><value>You enter the password in the connection window.</value></data>
+  <data name="Editor_FullScreen" xml:space="preserve"><value>Full screen</value></data>
+  <data name="Editor_Multimon" xml:space="preserve"><value>Use multiple monitors</value></data>
+  <data name="Editor_SelectedMonitors" xml:space="preserve"><value>Selected monitors (optional)</value></data>
+  <data name="Editor_SelectedMonitors_Placeholder" xml:space="preserve"><value>e.g. 0,1</value></data>
+  <data name="Editor_SelectedMonitors_Hint" xml:space="preserve"><value>The command “mstsc /l” shows the monitor IDs. Empty = all.</value></data>
+  <data name="Editor_WindowSize" xml:space="preserve"><value>Window size (when not full screen)</value></data>
+  <data name="Editor_Clipboard" xml:space="preserve"><value>Clipboard</value></data>
+  <data name="Editor_Drives" xml:space="preserve"><value>Local drives</value></data>
+  <data name="Editor_Printers" xml:space="preserve"><value>Printers</value></data>
+  <data name="Editor_Audio" xml:space="preserve"><value>Audio</value></data>
+  <data name="Editor_Audio_Local" xml:space="preserve"><value>Play on this computer</value></data>
+  <data name="Editor_Audio_Remote" xml:space="preserve"><value>Play on the remote computer</value></data>
+  <data name="Editor_Audio_None" xml:space="preserve"><value>Do not play</value></data>
+  <data name="Editor_Admin" xml:space="preserve"><value>Administrative session (/admin)</value></data>
+  <data name="Editor_Gateway" xml:space="preserve"><value>RD Gateway (optional)</value></data>
+  <data name="Editor_Gateway_Placeholder" xml:space="preserve"><value>gateway.company.com</value></data>
+  <data name="Editor_Gateway_Hint" xml:space="preserve"><value>When signing in from KeePass, the same credentials are used for the gateway.</value></data>
+  <data name="Editor_ExtraSettings" xml:space="preserve"><value>Additional .rdp settings (override the generated ones)</value></data>
+  <data name="Editor_ExtraSettings_Placeholder" xml:space="preserve"><value>e.g. smart sizing:i:1</value></data>
+  <data name="Editor_Error_Host" xml:space="preserve"><value>Enter the server address.</value></data>
+  <data name="Editor_Error_Port" xml:space="preserve"><value>The port must be between 1 and 65535.</value></data>
+  <data name="Editor_Error_KeePassEntry" xml:space="preserve"><value>Select a KeePass entry or choose a different sign-in method.</value></data>
+  <data name="Unlock_Title" xml:space="preserve"><value>Unlock KeePass</value></data>
+  <data name="Unlock_MasterPassword" xml:space="preserve"><value>Master password</value></data>
+  <data name="Unlock_Button" xml:space="preserve"><value>Unlock</value></data>
+  <data name="Unlock_Error_Empty" xml:space="preserve"><value>Enter the master password or a key file.</value></data>
+  <data name="Unlock_Error_WrongKey" xml:space="preserve"><value>Wrong password or key file.</value></data>
+  <data name="Unlock_Error_Open" xml:space="preserve"><value>Could not open the database: {0}</value></data>
+  <data name="Picker_Title" xml:space="preserve"><value>Select a KeePass entry</value></data>
+  <data name="Picker_Search_Placeholder" xml:space="preserve"><value>Search title, user name, URL and group…</value></data>
+  <data name="Picker_Count" xml:space="preserve"><value>{0} of {1} entries</value></data>
+  <data name="Picker_Select" xml:space="preserve"><value>Select</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_Nav_Dock" xml:space="preserve"><value>Panel</value></data>
+  <data name="Settings_Nav_KeePass" xml:space="preserve"><value>KeePass</value></data>
+  <data name="Settings_Nav_General" xml:space="preserve"><value>General</value></data>
+  <data name="Settings_Nav_About" xml:space="preserve"><value>About</value></data>
+  <data name="Settings_Edge" xml:space="preserve"><value>Screen edge</value></data>
+  <data name="Settings_Edge_Left" xml:space="preserve"><value>Left</value></data>
+  <data name="Settings_Edge_Right" xml:space="preserve"><value>Right</value></data>
+  <data name="Settings_Edge_Top" xml:space="preserve"><value>Top</value></data>
+  <data name="Settings_Edge_Bottom" xml:space="preserve"><value>Bottom</value></data>
+  <data name="Settings_Edge_Hint" xml:space="preserve"><value>The top edge collides with the mstsc connection bar. On an edge shared with another monitor, rest the mouse there for a moment.</value></data>
+  <data name="Settings_Monitor" xml:space="preserve"><value>Monitor</value></data>
+  <data name="Settings_Monitor_Primary" xml:space="preserve"><value>Primary monitor</value></data>
+  <data name="Settings_Monitor_Item" xml:space="preserve"><value>Monitor {0} – {1}×{2}</value></data>
+  <data name="Settings_Monitor_PrimarySuffix" xml:space="preserve"><value> (primary)</value></data>
+  <data name="Settings_Width" xml:space="preserve"><value>Width (px)</value></data>
+  <data name="Settings_ShowDelay" xml:space="preserve"><value>Show after (ms)</value></data>
+  <data name="Settings_HideDelay" xml:space="preserve"><value>Hide after (ms)</value></data>
+  <data name="Settings_HideAfterConnect" xml:space="preserve"><value>Hide the panel after connecting</value></data>
+  <data name="Settings_Hotkey" xml:space="preserve"><value>Global hotkey</value></data>
+  <data name="Settings_Hotkey_Hint" xml:space="preserve"><value>Click the field and press a key combination. In full-screen RDP the remote session captures the keyboard – use the mouse at the screen edge there.</value></data>
+  <data name="Settings_Error_Hotkey" xml:space="preserve"><value>The hotkey must contain a modifier (Ctrl/Alt/Shift/Win) and a key.</value></data>
+  <data name="Settings_KeePassDatabase" xml:space="preserve"><value>Database (.kdbx)</value></data>
+  <data name="Settings_KeePassDatabase_Placeholder" xml:space="preserve"><value>C:\...\Passwords.kdbx</value></data>
+  <data name="Settings_KeePassFilter" xml:space="preserve"><value>KeePass (*.kdbx)|*.kdbx|All files|*.*</value></data>
+  <data name="Settings_AutoLock" xml:space="preserve"><value>Lock automatically after inactivity (minutes, 0 = never)</value></data>
+  <data name="Settings_LockOnWinL" xml:space="preserve"><value>Lock when Windows is locked (Win+L)</value></data>
+  <data name="Settings_StartWithWindows" xml:space="preserve"><value>Start with Windows</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_Theme" xml:space="preserve"><value>Appearance</value></data>
+  <data name="Settings_Theme_Light" xml:space="preserve"><value>Light</value></data>
+  <data name="Settings_Theme_Dark" xml:space="preserve"><value>Dark</value></data>
+  <data name="Settings_CredentialCleanup" xml:space="preserve"><value>Delete the temporary credential after (seconds)</value></data>
+  <data name="Settings_CredentialCleanup_Hint" xml:space="preserve"><value>How long the KeePass password stays in Windows Credential Manager before mstsc reads it. Increase it if the sign-in does not finish in time (e.g. when confirming a certificate takes a while).</value></data>
+</root>

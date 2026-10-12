@@ -15,7 +15,9 @@
     <Authors>Jiri Nalepa</Authors>
     <Company>Jiri Nalepa</Company>
     <Copyright>© 2026 Jiri Nalepa</Copyright>
-    <Description>Správce RDP spojení s vysouvací lištou na okraji obrazovky a podporou KeePass.</Description>
+    <Description>RDP connection manager with an auto-hiding screen-edge panel and KeePass support.</Description>
+    <!-- Ship only our UI languages (dependencies bring satellite assemblies for many others). -->
+    <SatelliteResourceLanguages>en;cs</SatelliteResourceLanguages>
     <RepositoryUrl>https://github.com/jirinalepa/RDPManager</RepositoryUrl>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <!-- WFO0003: WinForms DPI hint; DPI awareness of this WPF app is declared in app.manifest. -->
@@ -30,6 +32,21 @@
 
   <ItemGroup>
     <AssemblyMetadata Include="RepositoryUrl" Value="$(RepositoryUrl)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- UI texts: Strings.resx = English (default), Strings.cs.resx = Czech. The typed accessor
+         Strings.Designer.cs is checked in (WPF's XAML pre-compilation pass cannot see build-time
+         generated code) and must be public for {x:Static}; Visual Studio regenerates it on save. -->
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

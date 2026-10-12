@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 using RDPManager.Services;
+using RDPManager.Properties;
 using Wpf.Ui.Controls;
 
 namespace RDPManager.Views;
@@ -45,7 +46,7 @@ public partial class KeePassEntryPickerWindow : FluentWindow
             e.Url.Contains(t, StringComparison.CurrentCultureIgnoreCase) ||
             e.GroupPath.Contains(t, StringComparison.CurrentCultureIgnoreCase))).ToList();
         EntryList.ItemsSource = filtered;
-        CountText.Text = $"{filtered.Count} z {_entries.Count} záznamů";
+        CountText.Text = Localization.Format(Strings.Picker_Count, filtered.Count, _entries.Count);
         if (EntryList.SelectedItem == null && filtered.Count > 0)
             EntryList.SelectedIndex = 0;
     }

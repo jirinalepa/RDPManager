@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Windows;
 using RDPManager.Models;
+using RDPManager.Properties;
 using Wpf.Ui.Controls;
 
 namespace RDPManager.Views;
@@ -15,7 +16,7 @@ public partial class ConnectionEditorWindow : FluentWindow
         _controller = controller;
         Result = connection;
         DataContext = connection;
-        Title = TitleBar.Title = isNew ? "Nové spojení" : $"Upravit – {connection.Name}";
+        Title = TitleBar.Title = isNew ? Strings.Editor_TitleNew : Localization.Format(Strings.Editor_TitleEdit, connection.Name);
         GroupBox.ItemsSource = controller.Groups.ToList();
 
         connection.PropertyChanged += OnConnectionChanged;
@@ -43,12 +44,12 @@ public partial class ConnectionEditorWindow : FluentWindow
     {
         var keePass = Result.CredentialMode == CredentialMode.KeePass;
         KeePassPanel.Visibility = keePass ? Visibility.Visible : Visibility.Collapsed;
-        UsernameLabel.Text = keePass ? "Přepsat uživatelské jméno (volitelné)" : "Uživatelské jméno";
+        UsernameLabel.Text = keePass ? Strings.Editor_UsernameOverride : Strings.Editor_Username;
         UsernameHint.Text = Result.CredentialMode switch
         {
-            CredentialMode.KeePass => "Prázdné = použije se jméno ze záznamu v KeePassu.",
-            CredentialMode.Default => "Volitelné. Pro přihlášení bez dotazu doménovým účtem musí politika povolit delegování výchozích pověření.",
-            _ => "Heslo zadáš v okně připojení.",
+            CredentialMode.KeePass => Strings.Editor_Hint_KeePass,
+            CredentialMode.Default => Strings.Editor_Hint_Default,
+            _ => Strings.Editor_Hint_Username,
         };
     }
 
@@ -71,17 +72,17 @@ public partial class ConnectionEditorWindow : FluentWindow
         Result.Group = Result.Group.Trim();
         if (string.IsNullOrEmpty(Result.Host))
         {
-            await Dialogs.ErrorAsync("Vyplň adresu serveru.");
+            await Dialogs.ErrorAsync(Strings.Editor_Error_Host);
             return;
         }
         if (Result.Port is < 1 or > 65535)
         {
-            await Dialogs.ErrorAsync("Port musí být v rozsahu 1–65535.");
+            await Dialogs.ErrorAsync(Strings.Editor_Error_Port);
             return;
         }
         if (Result.CredentialMode == CredentialMode.KeePass && string.IsNullOrEmpty(Result.KeePassEntryUuid))
         {
-            await Dialogs.ErrorAsync("Vyber záznam z KeePassu, nebo zvol jiný způsob přihlášení.");
+            await Dialogs.ErrorAsync(Strings.Editor_Error_KeePassEntry);
             return;
         }
         if (string.IsNullOrEmpty(Result.Name))

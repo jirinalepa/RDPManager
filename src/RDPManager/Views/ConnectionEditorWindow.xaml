@@ -3,7 +3,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:views="clr-namespace:RDPManager.Views"
-                 Title="Spojení"
+                 xmlns:p="clr-namespace:RDPManager.Properties"
                  Width="700" Height="580" MinWidth="580" MinHeight="480"
                  ExtendsContentIntoTitleBar="True"
                  WindowBackdropType="None"
@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar x:Name="TitleBar" Grid.Row="0" Title="Spojení" ShowMinimize="False" ShowMaximize="False" />
+        <ui:TitleBar x:Name="TitleBar" Grid.Row="0" ShowMinimize="False" ShowMaximize="False" />
 
         <Grid Grid.Row="1" Margin="12,4,16,0">
             <Grid.ColumnDefinitions>
@@ -36,82 +36,83 @@
                         <Setter Property="Margin" Value="0,0,0,2" />
                     </Style>
                 </ListBox.ItemContainerStyle>
-                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Desktop24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Obecné" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
-                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Key24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Přihlášení" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
-                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Window24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Obrazovka" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
-                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="ArrowSwap24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Přesměrování" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
-                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Settings24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="Pokročilé" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Desktop24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="{x:Static p:Strings.Editor_Nav_General}" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Key24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="{x:Static p:Strings.Editor_Nav_SignIn}" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Window24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="{x:Static p:Strings.Editor_Nav_Display}" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="ArrowSwap24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="{x:Static p:Strings.Editor_Nav_Redirection}" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
+                <ListBoxItem><StackPanel Orientation="Horizontal"><ui:SymbolIcon Symbol="Settings24" FontSize="18" Margin="0,0,10,0" /><TextBlock Text="{x:Static p:Strings.Editor_Nav_Advanced}" VerticalAlignment="Center" /></StackPanel></ListBoxItem>
             </ListBox>
 
             <Rectangle Grid.Column="0" Width="1" HorizontalAlignment="Right" Margin="0,4,0,0"
                        Fill="{DynamicResource DividerStrokeColorDefaultBrush}" />
 
             <!-- Sections -->
-            <Grid x:Name="SectionHost" Grid.Column="1" Margin="12,0,0,0">            <!-- General -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="SectionHost" Grid.Column="1" Margin="12,0,0,0">
+                <!-- General -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="4,4,12,12">
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Název" />
-                        <ui:TextBox x:Name="NameBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="např. Souborový server" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_Name}" />
+                        <ui:TextBox x:Name="NameBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="{x:Static p:Strings.Editor_Name_Placeholder}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="110" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource FieldLabel}" Text="Adresa (hostname nebo IP)" />
-                                <ui:TextBox x:Name="HostBox" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="server.firma.local" />
+                                <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_Host}" />
+                                <ui:TextBox x:Name="HostBox" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="{x:Static p:Strings.Editor_Host_Placeholder}" />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Margin="8,0,0,0">
-                                <TextBlock Style="{StaticResource FieldLabel}" Text="Port" />
+                                <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_Port}" />
                                 <ui:TextBox Text="{Binding Port}" />
                             </StackPanel>
                         </Grid>
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Skupina" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_Group}" />
                         <ComboBox x:Name="GroupBox" IsEditable="True" Text="{Binding Group, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Poznámka" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_Notes}" />
                         <ui:TextBox Text="{Binding Notes}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="70" VerticalContentAlignment="Top" />
                     </StackPanel>
                 </ScrollViewer>
 
-            <!-- Credentials -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <!-- Sign-in -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
-                        <TextBlock Style="{StaticResource SectionHeader}" Text="Způsob přihlášení" />
-                        <RadioButton GroupName="Mode" Content="Doménový / aktuální účet (mstsc použije uložené údaje nebo se zeptá)"
+                        <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static p:Strings.Editor_SignInMethod}" />
+                        <RadioButton GroupName="Mode" Content="{x:Static p:Strings.Editor_Mode_Default}"
                                      IsChecked="{Binding CredentialMode, Converter={StaticResource EnumEquals}, ConverterParameter=Default}" />
-                        <RadioButton GroupName="Mode" Margin="0,6,0,0" Content="Jen přednastavené uživatelské jméno"
+                        <RadioButton GroupName="Mode" Margin="0,6,0,0" Content="{x:Static p:Strings.Editor_Mode_Username}"
                                      IsChecked="{Binding CredentialMode, Converter={StaticResource EnumEquals}, ConverterParameter=Username}" />
-                        <RadioButton GroupName="Mode" Margin="0,6,0,0" Content="Jméno a heslo z KeePassu"
+                        <RadioButton GroupName="Mode" Margin="0,6,0,0" Content="{x:Static p:Strings.Editor_Mode_KeePass}"
                                      IsChecked="{Binding CredentialMode, Converter={StaticResource EnumEquals}, ConverterParameter=KeePass}" />
 
                         <StackPanel x:Name="KeePassPanel" Margin="0,8,0,0">
-                            <TextBlock Style="{StaticResource FieldLabel}" Text="Záznam v KeePassu" />
+                            <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_KeePassEntry}" />
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <ui:TextBox IsReadOnly="True" Text="{Binding KeePassEntryTitle, Mode=OneWay}"
-                                            PlaceholderText="(nevybráno)" Icon="{ui:SymbolIcon Key24}" />
-                                <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="Vybrat…" Click="PickEntry_Click" />
+                                            PlaceholderText="{x:Static p:Strings.Editor_NotSelected}" Icon="{ui:SymbolIcon Key24}" />
+                                <ui:Button Grid.Column="1" Margin="8,0,0,0" Content="{x:Static p:Strings.Editor_Pick}" Click="PickEntry_Click" />
                             </Grid>
                         </StackPanel>
 
-                        <TextBlock x:Name="UsernameLabel" Style="{StaticResource FieldLabel}" Text="Uživatelské jméno" />
-                        <ui:TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="DOMENA\uzivatel nebo uzivatel@domena" />
+                        <TextBlock x:Name="UsernameLabel" Style="{StaticResource FieldLabel}" />
+                        <ui:TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="{x:Static p:Strings.Editor_Username_Placeholder}" />
                         <TextBlock x:Name="UsernameHint" Style="{StaticResource Hint}" />
                     </StackPanel>
                 </ScrollViewer>
 
-            <!-- Display -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <!-- Display -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
-                        <ui:ToggleSwitch Margin="0,12,0,0" Content="Celá obrazovka" IsChecked="{Binding FullScreen}" />
-                        <ui:ToggleSwitch Margin="0,12,0,0" Content="Použít více monitorů" IsChecked="{Binding UseMultimon}" />
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Vybrané monitory (volitelné)" />
-                        <ui:TextBox Text="{Binding SelectedMonitors}" PlaceholderText="např. 0,1" />
-                        <TextBlock Style="{StaticResource Hint}" Text="ID monitorů zobrazí příkaz „mstsc /l“. Prázdné = všechny." />
-                        <TextBlock Style="{StaticResource SectionHeader}" Text="Velikost okna (když není celá obrazovka)" />
+                        <ui:ToggleSwitch Margin="0,12,0,0" Content="{x:Static p:Strings.Editor_FullScreen}" IsChecked="{Binding FullScreen}" />
+                        <ui:ToggleSwitch Margin="0,12,0,0" Content="{x:Static p:Strings.Editor_Multimon}" IsChecked="{Binding UseMultimon}" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_SelectedMonitors}" />
+                        <ui:TextBox Text="{Binding SelectedMonitors}" PlaceholderText="{x:Static p:Strings.Editor_SelectedMonitors_Placeholder}" />
+                        <TextBlock Style="{StaticResource Hint}" Text="{x:Static p:Strings.Editor_SelectedMonitors_Hint}" />
+                        <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static p:Strings.Editor_WindowSize}" />
                         <StackPanel Orientation="Horizontal">
                             <ui:TextBox Width="110" Text="{Binding Width}" />
                             <TextBlock Margin="8,0" VerticalAlignment="Center" Text="×" />
@@ -120,33 +121,33 @@
                     </StackPanel>
                 </ScrollViewer>
 
-            <!-- Redirection -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <!-- Redirection -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
-                        <ui:ToggleSwitch Margin="0,12,0,0" Content="Schránka" IsChecked="{Binding RedirectClipboard}" />
-                        <ui:ToggleSwitch Margin="0,12,0,0" Content="Lokální disky" IsChecked="{Binding RedirectDrives}" />
-                        <ui:ToggleSwitch Margin="0,12,0,0" Content="Tiskárny" IsChecked="{Binding RedirectPrinters}" />
-                        <TextBlock Style="{StaticResource SectionHeader}" Text="Zvuk" />
-                        <RadioButton GroupName="Audio" Content="Přehrávat na tomto počítači"
+                        <ui:ToggleSwitch Margin="0,12,0,0" Content="{x:Static p:Strings.Editor_Clipboard}" IsChecked="{Binding RedirectClipboard}" />
+                        <ui:ToggleSwitch Margin="0,12,0,0" Content="{x:Static p:Strings.Editor_Drives}" IsChecked="{Binding RedirectDrives}" />
+                        <ui:ToggleSwitch Margin="0,12,0,0" Content="{x:Static p:Strings.Editor_Printers}" IsChecked="{Binding RedirectPrinters}" />
+                        <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static p:Strings.Editor_Audio}" />
+                        <RadioButton GroupName="Audio" Content="{x:Static p:Strings.Editor_Audio_Local}"
                                      IsChecked="{Binding AudioMode, Converter={StaticResource EnumEquals}, ConverterParameter=Local}" />
-                        <RadioButton GroupName="Audio" Margin="0,6,0,0" Content="Přehrávat na vzdáleném počítači"
+                        <RadioButton GroupName="Audio" Margin="0,6,0,0" Content="{x:Static p:Strings.Editor_Audio_Remote}"
                                      IsChecked="{Binding AudioMode, Converter={StaticResource EnumEquals}, ConverterParameter=Remote}" />
-                        <RadioButton GroupName="Audio" Margin="0,6,0,0" Content="Nepřehrávat"
+                        <RadioButton GroupName="Audio" Margin="0,6,0,0" Content="{x:Static p:Strings.Editor_Audio_None}"
                                      IsChecked="{Binding AudioMode, Converter={StaticResource EnumEquals}, ConverterParameter=None}" />
                     </StackPanel>
                 </ScrollViewer>
 
-            <!-- Advanced -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <!-- Advanced -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel Margin="4,4,12,12">
-                        <ui:ToggleSwitch Margin="0,12,0,0" Content="Administrátorská relace (/admin)" IsChecked="{Binding AdminSession}" />
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="RD Gateway (volitelné)" />
-                        <ui:TextBox Text="{Binding GatewayHost}" PlaceholderText="gateway.firma.cz" />
-                        <TextBlock Style="{StaticResource Hint}" Text="Při přihlášení z KeePassu se stejné údaje použijí i pro gateway." />
-                        <TextBlock Style="{StaticResource FieldLabel}" Text="Další nastavení .rdp (přepíší vygenerovaná)" />
+                        <ui:ToggleSwitch Margin="0,12,0,0" Content="{x:Static p:Strings.Editor_Admin}" IsChecked="{Binding AdminSession}" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_Gateway}" />
+                        <ui:TextBox Text="{Binding GatewayHost}" PlaceholderText="{x:Static p:Strings.Editor_Gateway_Placeholder}" />
+                        <TextBlock Style="{StaticResource Hint}" Text="{x:Static p:Strings.Editor_Gateway_Hint}" />
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Editor_ExtraSettings}" />
                         <ui:TextBox Text="{Binding ExtraRdpSettings}" AcceptsReturn="True" TextWrapping="NoWrap"
                                     MinHeight="120" VerticalContentAlignment="Top" FontFamily="Cascadia Mono, Consolas"
-                                    PlaceholderText="např. smart sizing:i:1" />
+                                    PlaceholderText="{x:Static p:Strings.Editor_ExtraSettings_Placeholder}" />
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
@@ -155,8 +156,8 @@
         <Border Grid.Row="2" Margin="0,12,0,0" Padding="16,12"
                 Background="{DynamicResource SolidBackgroundFillColorSecondaryBrush}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button Appearance="Primary" Content="Uložit" MinWidth="100" IsDefault="True" Click="Save_Click" />
-                <ui:Button Margin="8,0,0,0" Content="Zrušit" MinWidth="100" IsCancel="True" />
+                <ui:Button Appearance="Primary" Content="{x:Static p:Strings.Common_Save}" MinWidth="100" IsDefault="True" Click="Save_Click" />
+                <ui:Button Margin="8,0,0,0" Content="{x:Static p:Strings.Common_Cancel}" MinWidth="100" IsCancel="True" />
             </StackPanel>
         </Border>
     </Grid>

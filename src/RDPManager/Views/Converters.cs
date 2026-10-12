@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using RDPManager.Models;
+using RDPManager.Properties;
 using Wpf.Ui.Controls;
 
 namespace RDPManager.Views;
@@ -8,7 +9,7 @@ namespace RDPManager.Views;
 public class EmptyGroupConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is string s && !string.IsNullOrWhiteSpace(s) ? s : "Bez skupiny";
+        value is string s && !string.IsNullOrWhiteSpace(s) ? s : Strings.Group_None;
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotSupportedException();

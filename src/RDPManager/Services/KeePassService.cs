@@ -7,6 +7,7 @@ using KeePassLib.Serialization;
 using KeePassLib.Utility;
 using Microsoft.Win32;
 using RDPManager.Models;
+using RDPManager.Properties;
 
 namespace RDPManager.Services;
 
@@ -49,7 +50,7 @@ public sealed partial class KeePassService : IDisposable
     {
         var path = DatabasePath;
         if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
-            throw new FileNotFoundException("KeePass databáze nebyla nalezena. Zkontroluj cestu v nastavení.", path);
+            throw new FileNotFoundException(Strings.Error_KeePassDatabaseNotFound, path);
 
         var db = await Task.Run(() =>
         {
@@ -115,7 +116,7 @@ public sealed partial class KeePassService : IDisposable
     private PwDatabase GetDatabase()
     {
         if (_db == null)
-            throw new InvalidOperationException("KeePass databáze je zamčená.");
+            throw new InvalidOperationException(Strings.Error_KeePassLocked);
         ReloadIfChanged();
         Touch();
         return _db;

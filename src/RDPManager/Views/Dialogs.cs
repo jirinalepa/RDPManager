@@ -1,4 +1,5 @@
 using System.Windows;
+using RDPManager.Properties;
 using Wpf.Ui.Controls;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
 using MessageBoxResult = Wpf.Ui.Controls.MessageBoxResult;
@@ -34,11 +35,11 @@ public static class Dialogs
     }
 
     public static Task ErrorAsync(string message, string title = "RDP Manager") =>
-        CreateBox(title, message, "OK", null, null).ShowDialogAsync();
+        CreateBox(title, message, Strings.Common_OK, null, null).ShowDialogAsync();
 
     public static async Task<bool> ConfirmAsync(string message, string confirmText, string title = "RDP Manager")
     {
-        var box = CreateBox(title, message, "Zrušit", confirmText, null);
+        var box = CreateBox(title, message, Strings.Common_Cancel, confirmText, null);
         box.PrimaryButtonAppearance = ControlAppearance.Primary;
         return await box.ShowDialogAsync() == MessageBoxResult.Primary;
     }
@@ -46,7 +47,7 @@ public static class Dialogs
     /// <returns>Primary, Secondary or None (cancel).</returns>
     public static Task<MessageBoxResult> ChooseAsync(string message, string primary, string secondary, string title = "RDP Manager")
     {
-        var box = CreateBox(title, message, "Zrušit", primary, secondary);
+        var box = CreateBox(title, message, Strings.Common_Cancel, primary, secondary);
         box.PrimaryButtonAppearance = ControlAppearance.Primary;
         return box.ShowDialogAsync();
     }

@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using RDPManager.Models;
+using RDPManager.Properties;
 using RDPManager.Services;
 using RDPManager.Views;
 using Wpf.Ui.Appearance;
@@ -62,7 +63,7 @@ public class AppController : IDisposable
             {
                 if (string.IsNullOrEmpty(connection.KeePassEntryUuid))
                 {
-                    await Dialogs.ErrorAsync($"Spojení „{connection.Name}“ nemá vybraný záznam z KeePassu.");
+                    await Dialogs.ErrorAsync(Localization.Format(Strings.Error_NoKeePassEntry, connection.Name));
                     return;
                 }
                 if (!EnsureKeePassUnlocked())
@@ -70,7 +71,7 @@ public class AppController : IDisposable
                 credential = KeePass.GetCredential(connection.KeePassEntryUuid);
                 if (credential == null)
                 {
-                    await Dialogs.ErrorAsync($"Záznam „{connection.KeePassEntryTitle}“ už v KeePass databázi neexistuje.");
+                    await Dialogs.ErrorAsync(Localization.Format(Strings.Error_KeePassEntryMissing, connection.KeePassEntryTitle));
                     return;
                 }
                 if (!string.IsNullOrWhiteSpace(connection.Username))
@@ -80,10 +81,8 @@ public class AppController : IDisposable
                 if (CredentialInjector.GetState(target) == CredentialInjector.State.Foreign)
                 {
                     var choice = await Dialogs.ChooseAsync(
-                        $"Pro {connection.Host} už je ve Windows uložené pověření (Správce pověření).\n\n" +
-                        "„Použít KeePass“ ho nahradí údaji z KeePassu a po připojení ho odstraní.\n" +
-                        "„Ponechat uložené“ použije stávající uložené pověření.",
-                        "Použít KeePass", "Ponechat uložené");
+                        Localization.Format(Strings.Prompt_ForeignCredential, connection.Host),
+                        Strings.Prompt_UseKeePass, Strings.Prompt_KeepSaved);
                     if (choice == MessageBoxResult.None)
                         return;
                     if (choice == MessageBoxResult.Secondary)
@@ -96,7 +95,7 @@ public class AppController : IDisposable
         }
         catch (Exception ex)
         {
-            await Dialogs.ErrorAsync($"Připojení k {connection.Host} se nezdařilo:\n{ex.Message}");
+            await Dialogs.ErrorAsync(Localization.Format(Strings.Error_ConnectFailed, connection.Host, ex.Message));
         }
     }
 
@@ -106,7 +105,7 @@ public class AppController : IDisposable
             return true;
         if (string.IsNullOrWhiteSpace(Settings.KeePassDatabasePath))
         {
-            _ = Dialogs.ErrorAsync("Nejdřív nastav cestu ke KeePass databázi (Nastavení → KeePass).");
+            _ = Dialogs.ErrorAsync(Strings.Error_KeePassPathNotSet);
             return false;
         }
         return Dialogs.ShowDialog(new KeePassUnlockWindow(this)) == true;
@@ -137,13 +136,13 @@ public class AppController : IDisposable
     {
         var copy = connection.Clone();
         copy.Id = Guid.NewGuid();
-        copy.Name += " (kopie)";
+        copy.Name += Strings.Connection_CopySuffix;
         AddConnection(copy);
     }
 
     public async Task DeleteConnectionAsync(Connection connection)
     {
-        if (await Dialogs.ConfirmAsync($"Opravdu smazat spojení „{connection.Name}“?", "Smazat"))
+        if (await Dialogs.ConfirmAsync(Localization.Format(Strings.Prompt_DeleteConnection, connection.Name), Strings.Common_Delete))
         {
             Connections.Remove(connection);
             SaveConnections();
@@ -154,7 +153,7 @@ public class AppController : IDisposable
     {
         var dialog = new Microsoft.Win32.OpenFileDialog
         {
-            Title = "Importovat .rdp soubory",
+            Title = Strings.Import_Title,
             Filter = "Remote Desktop (*.rdp)|*.rdp",
             Multiselect = true,
         };
@@ -169,7 +168,7 @@ public class AppController : IDisposable
                 if (!string.IsNullOrWhiteSpace(c.Host))
                     Connections.Add(c);
                 else
-                    errors.Add($"{Path.GetFileName(file)}: chybí adresa");
+                    errors.Add(Localization.Format(Strings.Import_MissingAddress, Path.GetFileName(file)));
             }
             catch (Exception ex)
             {
@@ -178,16 +177,17 @@ public class AppController : IDisposable
         }
         SaveConnections();
         if (errors.Count > 0)
-            await Dialogs.ErrorAsync("Některé soubory se nepodařilo importovat:\n" + string.Join("\n", errors));
+            await Dialogs.ErrorAsync(Localization.Format(Strings.Import_Errors, string.Join("\n", errors)));
     }
 
-    public void OpenSettings()
+    public async void OpenSettings()
     {
         var window = new SettingsWindow(this, Settings);
         if (Dialogs.ShowDialog(window) != true)
             return;
         var keePassChanged = window.Result.KeePassDatabasePath != Settings.KeePassDatabasePath
                              || window.Result.KeePassKeyFilePath != Settings.KeePassKeyFilePath;
+        var languageChanged = Localization.Resolve(window.Result.Language).Name != Localization.Resolve(Settings.Language).Name;
         Settings = window.Result;
         _store.SaveSettings(Settings);
         if (keePassChanged)
@@ -198,10 +198,18 @@ public class AppController : IDisposable
         }
         catch (Exception ex)
         {
-            _ = Dialogs.ErrorAsync("Nepodařilo se nastavit spouštění s Windows: " + ex.Message);
+            _ = Dialogs.ErrorAsync(Localization.Format(Strings.Error_Autostart, ex.Message));
         }
         ApplyTheme();
         SettingsChanged?.Invoke(this, EventArgs.Empty);
+
+        if (languageChanged)
+        {
+            // New dialogs follow the new language immediately; the panel and tray menu need a restart.
+            Localization.Apply(Settings.Language);
+            if (await Dialogs.ConfirmAsync(Strings.Prompt_RestartForLanguage, Strings.Prompt_Restart))
+                ((App)Application.Current).RestartApp();
+        }
     }
 
     public void SaveConnections()
@@ -212,7 +220,7 @@ public class AppController : IDisposable
         }
         catch (Exception ex)
         {
-            _ = Dialogs.ErrorAsync("Uložení spojení selhalo: " + ex.Message);
+            _ = Dialogs.ErrorAsync(Localization.Format(Strings.Error_SaveConnections, ex.Message));
         }
     }
 

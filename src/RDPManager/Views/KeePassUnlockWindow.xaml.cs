@@ -1,6 +1,7 @@
 using System.IO;
 using System.Windows;
 using KeePassLib.Keys;
+using RDPManager.Properties;
 using Wpf.Ui.Controls;
 
 namespace RDPManager.Views;
@@ -21,7 +22,7 @@ public partial class KeePassUnlockWindow : FluentWindow
 
     private void BrowseKeyFile_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new Microsoft.Win32.OpenFileDialog { Title = "Soubor s klíčem", Filter = "Všechny soubory|*.*" };
+        var dialog = new Microsoft.Win32.OpenFileDialog { Title = Strings.Common_KeyFile, Filter = Strings.Common_AllFilesFilter };
         if (dialog.ShowDialog(this) == true)
             KeyFileBox.Text = dialog.FileName;
     }
@@ -32,7 +33,7 @@ public partial class KeePassUnlockWindow : FluentWindow
         var keyFile = KeyFileBox.Text.Trim();
         if (string.IsNullOrEmpty(password) && string.IsNullOrEmpty(keyFile))
         {
-            ShowError("Zadej hlavní heslo nebo soubor s klíčem.");
+            ShowError(Strings.Unlock_Error_Empty);
             return;
         }
 
@@ -44,13 +45,13 @@ public partial class KeePassUnlockWindow : FluentWindow
         }
         catch (InvalidCompositeKeyException)
         {
-            ShowError("Nesprávné heslo nebo soubor s klíčem.");
+            ShowError(Strings.Unlock_Error_WrongKey);
             PasswordBox.Password = "";
             PasswordBox.Focus();
         }
         catch (Exception ex)
         {
-            ShowError("Databázi se nepodařilo otevřít: " + ex.Message);
+            ShowError(Localization.Format(Strings.Unlock_Error_Open, ex.Message));
         }
         finally
         {

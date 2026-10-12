@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using RDPManager.Models;
+using RDPManager.Properties;
 using RDPManager.Services;
 using RDPManager.Views;
 using Forms = System.Windows.Forms;
@@ -39,7 +40,7 @@ public partial class App : Application
         DispatcherUnhandledException += (_, args) =>
         {
             args.Handled = true;
-            _ = Dialogs.ErrorAsync("Neočekávaná chyba: " + args.Exception.Message);
+            _ = Dialogs.ErrorAsync(Localization.Format(Strings.Error_Unexpected, args.Exception.Message));
         };
         EventManager.RegisterClassHandler(typeof(ContextMenu), ContextMenu.OpenedEvent,
             new RoutedEventHandler((_, _) => _openMenus++));
@@ -50,6 +51,7 @@ public partial class App : Application
         RdpLauncher.CleanupTempFiles();
 
         _controller = new AppController();
+        Localization.Apply(_controller.Settings.Language);
         _controller.ApplyTheme();
         SystemEvents.UserPreferenceChanged += OnUserPreferenceChanged;
 
@@ -64,22 +66,22 @@ public partial class App : Application
             _dock.ShowFromCommand();
         else
             _tray!.ShowBalloonTip(3000, "RDP Manager",
-                $"Lišta je připravená – najeď myší na okraj obrazovky nebo stiskni {_controller.Settings.Hotkey}.",
+                Localization.Format(Strings.Tray_Balloon, _controller.Settings.Hotkey),
                 Forms.ToolTipIcon.None);
     }
 
     private void CreateTray()
     {
         var menu = new Forms.ContextMenuStrip();
-        menu.Items.Add("Zobrazit lištu", null, (_, _) => _dock!.ShowFromCommand());
-        menu.Items.Add("Nové spojení…", null, (_, _) => _controller!.AddConnection());
-        menu.Items.Add("Importovat .rdp soubory…", null, async (_, _) => await _controller!.ImportRdpFilesAsync());
-        menu.Items.Add("Nastavení…", null, (_, _) => _controller!.OpenSettings());
-        var lockItem = new Forms.ToolStripMenuItem("Zamknout KeePass", null, (_, _) => _controller!.KeePass.Lock());
+        menu.Items.Add(Strings.Tray_ShowPanel, null, (_, _) => _dock!.ShowFromCommand());
+        menu.Items.Add(Strings.Tray_NewConnection, null, (_, _) => _controller!.AddConnection());
+        menu.Items.Add(Strings.Tray_Import, null, async (_, _) => await _controller!.ImportRdpFilesAsync());
+        menu.Items.Add(Strings.Tray_Settings, null, (_, _) => _controller!.OpenSettings());
+        var lockItem = new Forms.ToolStripMenuItem(Strings.Dock_LockKeePass_Tooltip, null, (_, _) => _controller!.KeePass.Lock());
         menu.Items.Add(lockItem);
         menu.Items.Add(new Forms.ToolStripSeparator());
-        menu.Items.Add($"O aplikaci ({AppInfo.Version})", null, (_, _) => AppInfo.OpenRepository());
-        menu.Items.Add("Ukončit", null, (_, _) => ExitApp());
+        menu.Items.Add(Localization.Format(Strings.Tray_About, AppInfo.Version), null, (_, _) => AppInfo.OpenRepository());
+        menu.Items.Add(Strings.Tray_Exit, null, (_, _) => ExitApp());
         menu.Opening += (_, _) => lockItem.Enabled = _controller!.KeePass.IsOpen;
 
         _tray = new Forms.NotifyIcon
@@ -127,6 +129,18 @@ public partial class App : Application
         _dock?.Dispose();
         _controller?.Dispose();
         Shutdown();
+    }
+
+    /// <summary>Starts a fresh instance (e.g. after a language change) and exits this one.</summary>
+    public void RestartApp()
+    {
+        // Release single-instance ownership first so the new process does not just hand over to us.
+        _mutex?.ReleaseMutex();
+        _mutex?.Dispose();
+        _mutex = null;
+        if (Environment.ProcessPath is { } exe)
+            System.Diagnostics.Process.Start(exe);
+        ExitApp();
     }
 
     protected override void OnExit(ExitEventArgs e)

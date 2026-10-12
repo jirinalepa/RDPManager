@@ -4,6 +4,7 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:m="clr-namespace:RDPManager.Models"
         xmlns:views="clr-namespace:RDPManager.Views"
+        xmlns:p="clr-namespace:RDPManager.Properties"
         Title="RDP Manager"
         Width="300" Height="700"
         WindowStyle="None"
@@ -23,14 +24,14 @@
         <views:EmptyToNullConverter x:Key="EmptyToNullConverter" />
 
         <ContextMenu x:Key="ConnectionMenu" x:Shared="False">
-            <MenuItem Header="Připojit" Click="Connect_Click" Icon="{ui:SymbolIcon Play24}" FontWeight="SemiBold" />
-            <MenuItem Header="Připojit jako admin (/admin)" Click="ConnectAdmin_Click" Icon="{ui:SymbolIcon Shield24}" />
+            <MenuItem Header="{x:Static p:Strings.Dock_Menu_Connect}" Click="Connect_Click" Icon="{ui:SymbolIcon Play24}" FontWeight="SemiBold" />
+            <MenuItem Header="{x:Static p:Strings.Dock_Menu_ConnectAdmin}" Click="ConnectAdmin_Click" Icon="{ui:SymbolIcon Shield24}" />
             <Separator />
-            <MenuItem Header="Upravit…" Click="Edit_Click" Icon="{ui:SymbolIcon Edit24}" />
-            <MenuItem Header="Duplikovat" Click="Duplicate_Click" Icon="{ui:SymbolIcon Copy24}" />
-            <MenuItem Header="Kopírovat adresu" Click="CopyHost_Click" Icon="{ui:SymbolIcon Desktop24}" />
+            <MenuItem Header="{x:Static p:Strings.Dock_Menu_Edit}" Click="Edit_Click" Icon="{ui:SymbolIcon Edit24}" />
+            <MenuItem Header="{x:Static p:Strings.Dock_Menu_Duplicate}" Click="Duplicate_Click" Icon="{ui:SymbolIcon Copy24}" />
+            <MenuItem Header="{x:Static p:Strings.Dock_Menu_CopyAddress}" Click="CopyHost_Click" Icon="{ui:SymbolIcon Desktop24}" />
             <Separator />
-            <MenuItem Header="Smazat" Click="Delete_Click" Icon="{ui:SymbolIcon Delete24}" />
+            <MenuItem Header="{x:Static p:Strings.Common_Delete}" Click="Delete_Click" Icon="{ui:SymbolIcon Delete24}" />
         </ContextMenu>
 
         <Style x:Key="ConnectionItemStyle" TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
@@ -64,7 +65,7 @@
             <DockPanel Grid.Row="0" Margin="2,0,0,10" LastChildFill="False">
                 <Image x:Name="LogoImage" Width="20" Height="20" VerticalAlignment="Center" />
                 <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" FontSize="15" FontWeight="SemiBold" Text="RDP Manager" />
-                <ToggleButton DockPanel.Dock="Right" Padding="6" ToolTip="Připnout lištu (nezasouvat)"
+                <ToggleButton DockPanel.Dock="Right" Padding="6" ToolTip="{x:Static p:Strings.Dock_Pin_Tooltip}"
                               IsChecked="{Binding IsPinned}" Checked="Pin_Changed" Unchecked="Pin_Changed">
                     <ui:SymbolIcon Symbol="Pin20" />
                 </ToggleButton>
@@ -72,7 +73,7 @@
 
             <!-- Search -->
             <ui:TextBox x:Name="SearchBox" Grid.Row="1"
-                        PlaceholderText="Hledat (Ctrl+F)…"
+                        PlaceholderText="{x:Static p:Strings.Dock_Search_Placeholder}"
                         Icon="{ui:SymbolIcon Search20}"
                         ClearButtonEnabled="True"
                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
@@ -143,21 +144,21 @@
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                     <TextBlock Margin="0,8,0,0" TextAlignment="Center" TextWrapping="Wrap"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="Zatím žádná spojení. Přidej první tlačítkem + dole, nebo importuj .rdp soubory z menu v oznamovací oblasti." />
+                               Text="{x:Static p:Strings.Dock_Empty}" />
                 </StackPanel>
             </Grid>
 
             <!-- Active sessions -->
             <StackPanel Grid.Row="3" Margin="0,8,0,0"
                         Visibility="{Binding HasSessions, Converter={StaticResource BoolToVisibility}}">
-                <TextBlock Margin="2,0,0,6" FontSize="12" FontWeight="SemiBold" Text="AKTIVNÍ RELACE"
+                <TextBlock Margin="2,0,0,6" FontSize="12" FontWeight="SemiBold" Text="{x:Static p:Strings.Dock_ActiveSessions}"
                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 <ItemsControl ItemsSource="{Binding Sessions}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Margin="0,0,0,4" Padding="8,6" CornerRadius="6" Cursor="Hand"
                                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                    MouseLeftButtonUp="Session_Click" ToolTip="Přepnout na relaci">
+                                    MouseLeftButtonUp="Session_Click" ToolTip="{x:Static p:Strings.Dock_Session_Tooltip}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -168,11 +169,9 @@
                                              Fill="{DynamicResource SystemFillColorSuccessBrush}" />
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Text="{Binding Connection.Name}" TextTrimming="CharacterEllipsis" />
-                                        <TextBlock FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}">
-                                            <Run Text="od" /> <Run Text="{Binding StartedAtText, Mode=OneWay}" />
-                                        </TextBlock>
+                                        <TextBlock FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="{Binding StartedAtText}" />
                                     </StackPanel>
-                                    <ui:Button Grid.Column="2" Padding="4" Appearance="Transparent" ToolTip="Odpojit"
+                                    <ui:Button Grid.Column="2" Padding="4" Appearance="Transparent" ToolTip="{x:Static p:Strings.Dock_Disconnect_Tooltip}"
                                                Icon="{ui:SymbolIcon Dismiss16}" Click="SessionClose_Click" />
                                 </Grid>
                             </Border>
@@ -184,16 +183,16 @@
             <!-- Toolbar -->
             <Grid Grid.Row="4" Margin="0,8,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <ui:Button Appearance="Primary" Icon="{ui:SymbolIcon Add20}" Content="Nové" Click="Add_Click" ToolTip="Nové spojení" />
+                    <ui:Button Appearance="Primary" Icon="{ui:SymbolIcon Add20}" Content="{x:Static p:Strings.Dock_New}" Click="Add_Click" ToolTip="{x:Static p:Strings.Dock_New_Tooltip}" />
                     <ui:Button Margin="6,0,0,0" Padding="8" Appearance="Transparent" Icon="{ui:SymbolIcon ArrowImport20}"
-                               Click="Import_Click" ToolTip="Importovat .rdp soubory" />
+                               Click="Import_Click" ToolTip="{x:Static p:Strings.Import_Title}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <ui:Button Padding="8" Appearance="Transparent" Icon="{ui:SymbolIcon LockClosed20}"
-                               Click="LockKeePass_Click" ToolTip="Zamknout KeePass"
+                               Click="LockKeePass_Click" ToolTip="{x:Static p:Strings.Dock_LockKeePass_Tooltip}"
                                Visibility="{Binding IsKeePassOpen, Converter={StaticResource BoolToVisibility}}" />
                     <ui:Button Padding="8" Appearance="Transparent" Icon="{ui:SymbolIcon Settings20}"
-                               Click="Settings_Click" ToolTip="Nastavení" />
+                               Click="Settings_Click" ToolTip="{x:Static p:Strings.Dock_Settings_Tooltip}" />
                 </StackPanel>
             </Grid>
         </Grid>
