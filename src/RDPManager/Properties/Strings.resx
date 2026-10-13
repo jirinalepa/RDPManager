@@ -141,6 +141,8 @@
   <data name="Settings_Width" xml:space="preserve"><value>Width (px)</value></data>
   <data name="Settings_ShowDelay" xml:space="preserve"><value>Show after (ms)</value></data>
   <data name="Settings_HideDelay" xml:space="preserve"><value>Hide after (ms)</value></data>
+  <data name="Settings_TriggerZone" xml:space="preserve"><value>Active part of the edge (%)</value></data>
+  <data name="Settings_TriggerZone_Hint" xml:space="preserve"><value>The panel shows only when the mouse touches this part of the edge, centred on it (e.g. 50 = the middle half of the screen height). 100 = the whole edge.</value></data>
   <data name="Settings_HideAfterConnect" xml:space="preserve"><value>Hide the panel after connecting</value></data>
   <data name="Settings_Hotkey" xml:space="preserve"><value>Global hotkey</value></data>
   <data name="Settings_Hotkey_Hint" xml:space="preserve"><value>Click the field and press a key combination. In full-screen RDP the remote session captures the keyboard – use the mouse at the screen edge there.</value></data>

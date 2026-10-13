@@ -141,6 +141,8 @@
   <data name="Settings_Width" xml:space="preserve"><value>Šířka (px)</value></data>
   <data name="Settings_ShowDelay" xml:space="preserve"><value>Vysunout po (ms)</value></data>
   <data name="Settings_HideDelay" xml:space="preserve"><value>Zasunout po (ms)</value></data>
+  <data name="Settings_TriggerZone" xml:space="preserve"><value>Aktivní část okraje (%)</value></data>
+  <data name="Settings_TriggerZone_Hint" xml:space="preserve"><value>Lišta se vysune jen při dotyku myši v této části okraje, uprostřed (např. 50 = prostřední polovina výšky obrazovky). 100 = celý okraj.</value></data>
   <data name="Settings_HideAfterConnect" xml:space="preserve"><value>Po připojení lištu zasunout</value></data>
   <data name="Settings_Hotkey" xml:space="preserve"><value>Globální klávesová zkratka</value></data>
   <data name="Settings_Hotkey_Hint" xml:space="preserve"><value>Klikni do pole a stiskni kombinaci. Ve full-screen RDP zachytává klávesy vzdálená relace – tam lištu vyvoláš myší na okraji.</value></data>

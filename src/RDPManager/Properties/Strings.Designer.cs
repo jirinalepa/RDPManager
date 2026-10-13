@@ -1106,6 +1106,22 @@ namespace RDPManager.Properties {
             }
         }
         /// <summary>
+        ///   Looks up a localized string similar to Active part of the edge (%).
+        /// </summary>
+        public static string Settings_TriggerZone {
+            get {
+                return ResourceManager.GetString("Settings_TriggerZone", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to The panel shows only when the mouse touches this part of the edge, centred on....
+        /// </summary>
+        public static string Settings_TriggerZone_Hint {
+            get {
+                return ResourceManager.GetString("Settings_TriggerZone_Hint", resourceCulture);
+            }
+        }
+        /// <summary>
         ///   Looks up a localized string similar to Hide the panel after connecting.
         /// </summary>
         public static string Settings_HideAfterConnect {

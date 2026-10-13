@@ -84,6 +84,10 @@
                             </StackPanel>
                         </Grid>
 
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="{x:Static p:Strings.Settings_TriggerZone}" />
+                        <ui:TextBox Width="120" HorizontalAlignment="Left" Text="{Binding EdgeTriggerPercent}" />
+                        <TextBlock Style="{StaticResource Hint}" Text="{x:Static p:Strings.Settings_TriggerZone_Hint}" />
+
                         <ui:ToggleSwitch Margin="0,14,0,0" Content="{x:Static p:Strings.Settings_HideAfterConnect}" IsChecked="{Binding HideAfterConnect}" />
                         <ui:ToggleSwitch Margin="0,14,0,0" Content="{x:Static p:Strings.Settings_Hotkey}" IsChecked="{Binding HotkeyEnabled}" />
                         <ui:TextBox x:Name="HotkeyBox" Margin="0,8,0,0" IsReadOnly="True" IsReadOnlyCaretVisible="True"

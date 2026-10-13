@@ -138,7 +138,7 @@ public sealed class EdgeDockController : IDisposable
 
         if (!IsShown)
         {
-            if (IsAtEdge(p, GetScreen().Bounds, settings.Edge))
+            if (IsAtEdge(p, GetScreen().Bounds, settings.Edge, settings.EdgeTriggerPercent))
             {
                 _edgeSince ??= now;
                 if (now - _edgeSince >= TimeSpan.FromMilliseconds(settings.ShowDelayMs))
@@ -173,10 +173,19 @@ public sealed class EdgeDockController : IDisposable
             Hide();
     }
 
-    private static bool IsAtEdge(NativeMethods.POINT p, Rectangle b, DockEdge edge)
+    /// <param name="triggerPercent">Length of the active zone in % of the edge, centred on the edge.</param>
+    private static bool IsAtEdge(NativeMethods.POINT p, Rectangle b, DockEdge edge, int triggerPercent)
     {
         if (!b.Contains(p.X, p.Y))
             return false;
+
+        var vertical = edge is DockEdge.Left or DockEdge.Right;
+        var (start, length, pos) = vertical ? (b.Top, b.Height, p.Y) : (b.Left, b.Width, p.X);
+        var zone = length * Math.Clamp(triggerPercent, 10, 100) / 100;
+        var zoneStart = start + (length - zone) / 2;
+        if (pos < zoneStart || pos >= zoneStart + zone)
+            return false;
+
         return edge switch
         {
             DockEdge.Left => p.X <= b.Left,

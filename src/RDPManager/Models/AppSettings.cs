@@ -32,6 +32,8 @@ public class AppSettings
     /// <summary>Panel width in DIPs.</summary>
     public int DockSize { get; set; } = 300;
     public int ShowDelayMs { get; set; } = 100;
+    /// <summary>Length of the edge zone that shows the panel, in % of the edge, centred (100 = whole edge).</summary>
+    public int EdgeTriggerPercent { get; set; } = 50;
     public int HideDelayMs { get; set; } = 700;
     public bool HideAfterConnect { get; set; } = true;
     public bool HotkeyEnabled { get; set; } = true;

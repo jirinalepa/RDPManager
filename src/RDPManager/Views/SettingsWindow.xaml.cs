@@ -98,6 +98,7 @@ public partial class SettingsWindow : FluentWindow
         Result.MonitorDeviceName = MonitorBox.SelectedValue as string ?? "";
         Result.DockSize = Math.Clamp(Result.DockSize, 200, 800);
         Result.ShowDelayMs = Math.Clamp(Result.ShowDelayMs, 0, 5000);
+        Result.EdgeTriggerPercent = Math.Clamp(Result.EdgeTriggerPercent, 10, 100);
         Result.HideDelayMs = Math.Clamp(Result.HideDelayMs, 0, 10000);
         Result.KeePassAutoLockMinutes = Math.Max(0, Result.KeePassAutoLockMinutes);
         Result.CredentialCleanupSeconds = Math.Clamp(Result.CredentialCleanupSeconds, 10, 600);
